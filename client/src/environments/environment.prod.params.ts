@@ -1,10 +1,10 @@
 export const params = {
-  assetsBaseUrl: '',
-  googleTrackerId: '',
-  apiUrl: '',
-  partnerLogoUrl: '',
-  language: '',
-  endangeredLanguage: '',
-  termsAndPrivacyEnabled: false,
-  termsAndPrivacyContent: null
+	assetsBaseUrl: "",
+	googleTrackerId: "",
+	apiUrl: "https://australia-southeast1-woolaroo-project.cloudfunctions.net/",
+	partnerLogoUrl: "",
+	language: "",
+	endangeredLanguage: "",
+	termsAndPrivacyEnabled: false,
+	termsAndPrivacyContent: null,
 };
