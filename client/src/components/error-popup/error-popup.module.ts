@@ -8,6 +8,6 @@ import { I18nModule } from "../../i18n/i18n.module";
 	declarations: [ErrorPopUpComponent],
 	exports: [ErrorPopUpComponent],
 	imports: [MatDialogModule, MatButtonModule, I18nModule],
-	entryComponents: [ErrorPopUpComponent],
+	// entryComponents: [ErrorPopUpComponent],
 })
 export class ErrorPopUpModule {}

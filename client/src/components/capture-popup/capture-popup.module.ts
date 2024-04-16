@@ -7,6 +7,6 @@ import { BusySpinnerModule } from "../../components/busy-spinner/busy-spinner.mo
 	declarations: [CapturePopUpComponent],
 	exports: [CapturePopUpComponent],
 	imports: [MatDialogModule, BusySpinnerModule],
-	entryComponents: [CapturePopUpComponent],
+	// entryComponents: [CapturePopUpComponent],
 })
 export class CapturePopUpModule {}
