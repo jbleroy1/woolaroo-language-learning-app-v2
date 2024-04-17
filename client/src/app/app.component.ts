@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
 			"orientation" in window.screen &&
 			"lock" in window.screen.orientation
 		) {
-			window.screen.orientation.lock("portrait").then(
+			(screen.orientation as any).lock("portrait").then(
 				() => logger.log("Screen locked in portrait mode"),
 				() => logger.warn("Failed locking screen orientation")
 			);
