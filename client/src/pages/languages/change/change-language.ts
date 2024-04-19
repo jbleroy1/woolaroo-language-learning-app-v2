@@ -19,6 +19,7 @@ const logger = getLogger("ChangeLanguagePageComponent");
 	styleUrls: ["./change-language.scss"],
 })
 export class ChangeLanguagePageComponent implements AfterViewInit {
+	showResults = false;
 	@ViewChild(CameraPreviewComponent)
 	private cameraPreview: CameraPreviewComponent | null = null;
 
@@ -110,5 +111,9 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 				this.currentEndangeredLanguageIndex
 			].code;
 		await this.profileService.saveProfile(profile);
+	}
+
+	onSearchLanguage() {
+		this.showResults = !this.showResults;
 	}
 }
