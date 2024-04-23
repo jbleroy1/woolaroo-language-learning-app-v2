@@ -25,7 +25,7 @@
     (ended)="onAudioStopped()" (pause)="onAudioStopped()"></audio>
 </div>
 <div class="add-word" [class.hidden]="!selectedWordVisible">
-  <div class="message" (click)="onAddTranslationClick()">
+  <div class="message" (click)="onAddTranslationClick()" (keydown)="onKeyDown($event)">
     <app-icon icon="add" shadow="true"></app-icon>
     <span [innerHTML]="'Add word' | translate:'sendFeedback'"></span>
   </div>
