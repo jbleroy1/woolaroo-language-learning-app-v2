@@ -3,10 +3,11 @@ import { LanguageFilterComponent } from "./language-filter.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
 import { MatIconModule } from "@angular/material/icon";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
 	declarations: [LanguageFilterComponent],
 	exports: [LanguageFilterComponent],
-	imports: [MatFormFieldModule, MatSelectModule, MatIconModule],
+	imports: [MatFormFieldModule, MatSelectModule, MatIconModule, FormsModule],
 })
 export class LanguageFilterModule {}

@@ -22,7 +22,7 @@
 <div class="language-filter">
 	<span class="label" [innerHTML]="'I\'d like to explore a language.'"></span>
 	<app-language-filter
-		(onSearchLanguage)="onSearchLanguage()"
+		(onSearchLanguage)="onSearchLanguage($event)"
 	></app-language-filter>
 </div>
 } @if(showResults){
@@ -48,7 +48,7 @@
 <button
 	mat-flat-button
 	color="accent"
-	(click)="onSearchLanguage()"
+	(click)="showResults = false"
 	class="next"
 >
 	<span [innerHTML]="'Back to search' | translate:'back'"></span>

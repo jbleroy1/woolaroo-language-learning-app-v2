@@ -1,16 +1,20 @@
 <div class="filter-select">
-	<select [(value)]="selectedRegion">
+	<select [(ngModel)]="selectedRegion" (change)="languageToSearch = ''">
 		<option value="none" disabled>Filter language by region</option>
-		<option value="option1">Africa</option>
-		<option value="option2">Europe</option>
-		<option value="option3">Asia</option>
+		<option value="africa">Africa</option>
+		<option value="europe">Europe</option>
+		<option value="asia">Asia</option>
 	</select>
 </div>
 <div class="filter-span">
 	<span class="label" [innerHTML]="'or'"></span>
 </div>
 <div class="filter-input">
-	<input placeholder="Search language by name" [(value)]="languageToSearch" />
+	<input
+		placeholder="Search language by name"
+		(focus)="selectedRegion = 'none'"
+		[(ngModel)]="languageToSearch"
+	/>
 </div>
 <div class="filter-button">
 	<button

@@ -20,6 +20,9 @@ const logger = getLogger("ChangeLanguagePageComponent");
 })
 export class ChangeLanguagePageComponent implements AfterViewInit {
 	showResults = false;
+	endangeredLanguages: EndangeredLanguage[] =
+		this.endangeredLanguageService.languages;
+
 	@ViewChild(CameraPreviewComponent)
 	private cameraPreview: CameraPreviewComponent | null = null;
 
@@ -32,16 +35,15 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 		return this._currentUILanguageIndex;
 	}
 
-	public get endangeredLanguages(): EndangeredLanguage[] {
-		return this.endangeredLanguageService.languages;
-	}
-
 	private _currentEndangeredLanguageIndex = 0;
 	public get currentEndangeredLanguageIndex(): number {
 		return this._currentEndangeredLanguageIndex;
 	}
 
 	public get currentEndangeredLanguageDescriptionKey(): string {
+		console.log(this.endangeredLanguages);
+		console.log(this._currentEndangeredLanguageIndex);
+
 		const code =
 			this.endangeredLanguages[this._currentEndangeredLanguageIndex].code;
 		return `shortDescription_${code}`;
@@ -56,6 +58,7 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 		this._currentUILanguageIndex = this.i18nService.languages.indexOf(
 			this.i18nService.currentLanguage
 		);
+
 		this._currentEndangeredLanguageIndex =
 			this.endangeredLanguageService.languages.indexOf(
 				this.endangeredLanguageService.currentLanguage
@@ -79,9 +82,19 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 	}
 
 	onEndangeredLanguageChanged(index: number) {
-		this._currentEndangeredLanguageIndex = index;
+		let _index = index;
+
+		console.log("on andangered language changed");
+
+		console.log(this.endangeredLanguageService.languages, index);
+
+		if (index > this.endangeredLanguages.length) {
+			_index = 0;
+		}
+
+		this._currentEndangeredLanguageIndex = _index;
 		this.endangeredLanguageService.setLanguage(
-			this.endangeredLanguageService.languages[index].code
+			this.endangeredLanguageService.languages[_index]?.code
 		);
 	}
 
@@ -113,7 +126,30 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 		await this.profileService.saveProfile(profile);
 	}
 
-	onSearchLanguage() {
+	onSearchLanguage(e: any) {
+		console.log("on search", e);
+
+		if (e.region !== "none") {
+			this.endangeredLanguages =
+				this.endangeredLanguageService.languages.filter((lan) =>
+					lan.code.includes(e.region)
+				);
+		}
+
+		if (e.language !== "none") {
+			let _endangeredLanguages =
+				this.endangeredLanguageService.languages.filter((lan) =>
+					lan.name.includes(e.language)
+				);
+
+			if (_endangeredLanguages.length === 0) {
+				this.endangeredLanguages =
+					this.endangeredLanguageService.languages;
+			} else {
+				this.endangeredLanguages = _endangeredLanguages;
+			}
+		}
+
 		this.showResults = !this.showResults;
 	}
 }
