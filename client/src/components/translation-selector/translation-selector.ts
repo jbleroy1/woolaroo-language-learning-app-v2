@@ -43,6 +43,11 @@ export class TranslationSelectorComponent {
 
   constructor() {
   }
+  onKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.onAddTranslationClick();
+    }
+  }    
 
   onPlayAudioClick() {
     if (!this.audioPlayer || !this.audioPlayer.nativeElement) {

@@ -98,7 +98,7 @@
   }
 }
 
-.translation-not-found {
+.add-word {
   flex: 0 0 auto;
   color: mat.get-color-from-palette($app-inverted, '500-contrast');
   text-align: center;
@@ -107,7 +107,7 @@
 
   .message {
     margin-bottom: 20px;
-    font-size: 3rem;
+    font-size: 2rem;
     line-height: 3rem;
     cursor: pointer;
 
@@ -140,7 +140,7 @@ app-selection-line {
 }
 
 .translation-container,
-.translation-not-found,
+.add-word,
 app-selection-line {
   transition: opacity 0.3s ease-in-out;
 
