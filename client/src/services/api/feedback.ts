@@ -36,7 +36,7 @@ export class APIFeedbackService implements IFeedbackService {
       native_language: feedback.nativeLanguage,
       sound_link: soundUrl,
       types: feedback.types,
-      content: feedback.content
+      content: feedback.content || ''
     };
     await this.http.post(this.config.feedbackEndpointURL, requestBody, { responseType: 'text' }).toPromise();
     logger.log('Feedback sent');
