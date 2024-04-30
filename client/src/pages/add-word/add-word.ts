@@ -44,9 +44,7 @@ export class AddWordPageComponent implements AfterViewInit {
       word: new FormControl(word ? word.original : '', this.i18n.currentLanguage.code !== DEFAULT_LOCALE ? [
         Validators.required
       ] : []),
-      nativeWord: new FormControl(word ? word.translation : '', [
-        Validators.required
-      ]),
+      nativeWord: new FormControl(word ? word.translation : '', []),
       englishWord: new FormControl(word ? word.english : '', [
         Validators.required
       ]),
