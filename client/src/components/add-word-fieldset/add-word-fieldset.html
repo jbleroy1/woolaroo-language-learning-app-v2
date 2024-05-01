@@ -4,7 +4,6 @@
       <mat-form-field class="text" appearance="outline" [hideRequiredMarker]="true">
         <mat-label [innerHTML]="'Current Word in native script' | translate:'wordInNativeScript'"></mat-label>
         <input type="text" matInput name="nativeWord" formControlName="nativeWord" maxlength="100" />
-        <mat-error *ngIf="fieldHasError('nativeWord', 'required')" [innerHTML]="'Word in native script is required' | translate:'nativeWordRequired'"></mat-error>
       </mat-form-field>
       <mat-form-field class="text" appearance="outline" [hideRequiredMarker]="true">
         <mat-label [innerHTML]="'Current Transliteration'"></mat-label>
