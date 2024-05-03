@@ -20,8 +20,11 @@ const logger = getLogger("ChangeLanguagePageComponent");
 })
 export class ChangeLanguagePageComponent implements AfterViewInit {
 	showResults = false;
-	endangeredLanguages: EndangeredLanguage[] =
-		this.endangeredLanguageService.languages;
+	private allLanguages: EndangeredLanguage[] = [];
+
+	public get endangeredLanguages(): EndangeredLanguage[] {
+		return this.endangeredLanguageService.languages;
+	}
 
 	@ViewChild(CameraPreviewComponent)
 	private cameraPreview: CameraPreviewComponent | null = null;
@@ -41,9 +44,6 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 	}
 
 	public get currentEndangeredLanguageDescriptionKey(): string {
-		console.log(this.endangeredLanguages);
-		console.log(this._currentEndangeredLanguageIndex);
-
 		const code =
 			this.endangeredLanguages[this._currentEndangeredLanguageIndex].code;
 		return `shortDescription_${code}`;
@@ -63,6 +63,8 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 			this.endangeredLanguageService.languages.indexOf(
 				this.endangeredLanguageService.currentLanguage
 			);
+
+		this.allLanguages = this.endangeredLanguageService.languages;
 	}
 
 	ngAfterViewInit() {
@@ -86,9 +88,9 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 
 		console.log("on andangered language changed");
 
-		console.log(this.endangeredLanguageService.languages, index);
+		console.log(this.endangeredLanguageService.languages.length);
 
-		if (index > this.endangeredLanguages.length) {
+		if (index > this.endangeredLanguages.length - 1) {
 			_index = 0;
 		}
 
@@ -127,28 +129,26 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 	}
 
 	onSearchLanguage(e: any) {
-		console.log("on search", e);
+		let _endangeredLanguages = this.allLanguages;
 
-		if (e.region !== "none") {
-			this.endangeredLanguages =
-				this.endangeredLanguageService.languages.filter((lan) =>
-					lan.code.includes(e.region)
-				);
+		if (e.region !== "none" && e.region !== "" && e.region !== null) {
+			_endangeredLanguages = this.allLanguages.filter(
+				(lan) => lan.region.toLowerCase() === e.region.toLowerCase()
+			);
 		}
 
-		if (e.language !== "none") {
-			let _endangeredLanguages =
-				this.endangeredLanguageService.languages.filter((lan) =>
-					lan.name.includes(e.language)
-				);
-
-			if (_endangeredLanguages.length === 0) {
-				this.endangeredLanguages =
-					this.endangeredLanguageService.languages;
-			} else {
-				this.endangeredLanguages = _endangeredLanguages;
-			}
+		if (e.language !== "none" && e.language !== "" && e.language !== null) {
+			_endangeredLanguages = this.allLanguages.filter((lan) =>
+				lan.name.includes(e.language)
+			);
 		}
+
+		if (_endangeredLanguages.length === 0) {
+			_endangeredLanguages = this.allLanguages;
+		}
+
+		this.endangeredLanguageService.setLanguages(_endangeredLanguages);
+		this.i18nService.initI8n();
 
 		this.showResults = !this.showResults;
 	}

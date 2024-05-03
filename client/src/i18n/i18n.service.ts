@@ -50,7 +50,15 @@ export class I18nService {
 		this._currentLanguage =
 			this.config.languages.find((lang) => lang.default) ||
 			this.config.languages[0];
-		this.loadTranslations(this._currentLanguage);
+		this.initI8n();
+	}
+
+	public async initI8n() {
+		this._translations = null;
+		this._currentLanguage =
+			this.config.languages.find((lang) => lang.default) ||
+			this.config.languages[0];
+		await this.loadTranslations(this._currentLanguage);
 	}
 
 	async setLanguage(code: string) {

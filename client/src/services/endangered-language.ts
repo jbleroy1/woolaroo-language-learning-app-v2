@@ -18,6 +18,7 @@ export interface EndangeredLanguage {
 	sampleWordImageURL: string;
 	sampleWordTranslation: string;
 	nativeSpeakers: string;
+	region: string;
 }
 
 interface EndangeredLanguageConfig {
@@ -64,5 +65,10 @@ export class EndangeredLanguageService {
 		logger.log("Endangered language changed: " + code);
 		this._currentLanguage = newLanguage;
 		this.currentLanguageChanged.emit(this._currentLanguage.code);
+	}
+
+	public setLanguages(languages: EndangeredLanguage[]) {
+		this.config.languages = languages;
+		this._currentLanguage = languages[0];
 	}
 }

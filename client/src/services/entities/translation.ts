@@ -1,7 +1,12 @@
+export interface Translation {
+	english: string;
+	original: string;
+	translation: string;
+	transliteration: string;
+	soundURL: string | null;
+}
+
 export interface WordTranslation {
-  original: string|null;
-  english: string;
-  translation: string;
-  transliteration: string;
-  soundURL: string|null;
+	english: string;
+	translations: Translation[];
 }

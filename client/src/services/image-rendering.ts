@@ -1,5 +1,5 @@
 import { Inject, Injectable, InjectionToken } from "@angular/core";
-import { WordTranslation } from "./entities/translation";
+import { Translation, WordTranslation } from "./entities/translation";
 import { canvasToBlob } from "../util/image";
 import { I18nService, Language } from "../i18n/i18n.service";
 import { EndangeredLanguage } from "./endangered-language";
@@ -88,7 +88,7 @@ export class ImageRenderingService {
 
 	async renderImage(
 		imageData: Blob,
-		word: WordTranslation,
+		word: Translation,
 		sourceLanguage: Language,
 		endangeredLanguage: EndangeredLanguage,
 		width: number,
@@ -102,6 +102,7 @@ export class ImageRenderingService {
 			URL.revokeObjectURL(imageURL);
 			throw ex;
 		}
+
 		const canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = width;
 		canvas.height = height;
@@ -132,7 +133,9 @@ export class ImageRenderingService {
 			width / window.innerWidth,
 			height / window.innerHeight
 		);
+
 		await this._renderBanner(context, width, scale);
+
 		if (!word) {
 			return canvasToBlob(canvas);
 		}
@@ -151,7 +154,7 @@ export class ImageRenderingService {
 
 	private _renderTranslations(
 		context: CanvasRenderingContext2D,
-		word: WordTranslation,
+		word: Translation,
 		sourceLanguage: Language,
 		endangeredLanguage: EndangeredLanguage,
 		width: number,
@@ -211,6 +214,7 @@ export class ImageRenderingService {
 		scale: number
 	) {
 		const bannerConfig = this.config.banner;
+
 		// draw background
 		context.fillStyle = bannerConfig.backgroundColor;
 		context.fillRect(0, 0, width, bannerConfig.height * scale);
@@ -218,12 +222,15 @@ export class ImageRenderingService {
 		const logoImage = await ImageRenderingService._loadImage(
 			bannerConfig.logoURL
 		);
+
 		let y = bannerConfig.logoY * scale;
 		const logoHeight = bannerConfig.logoHeight * scale;
 		const logoScale = logoHeight / logoImage.naturalHeight;
 		const logoWidth = logoImage.naturalWidth * logoScale;
 		const logoX = width * 0.5 - logoWidth * 0.5;
+
 		context.drawImage(logoImage, logoX, y, logoWidth, logoHeight);
+
 		// draw attribution image
 		y += logoHeight + bannerConfig.spacing * scale;
 		const attributionImage = await ImageRenderingService._loadImage(
