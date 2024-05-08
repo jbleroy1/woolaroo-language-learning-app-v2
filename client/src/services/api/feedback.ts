@@ -19,11 +19,6 @@ export class APIFeedbackService implements IFeedbackService {
   }
 
   public async sendFeedback(feedback: Feedback): Promise<any> {
-    let soundUrl: string|null = null;
-    if (feedback.recording) {
-      logger.log('Sending audio');
-      soundUrl = await this.http.post(this.config.addWordAudioEndpointURL, feedback.recording, { responseType: 'text' }).toPromise();
-    }
     logger.log('Sending feedback');
     const requestBody = {
       primary_word: feedback.word ? feedback.word.toLowerCase() : feedback.word,
@@ -34,7 +29,7 @@ export class APIFeedbackService implements IFeedbackService {
       suggested_transliteration: feedback.suggestedTransliteration ? feedback.suggestedTransliteration.toLowerCase() : feedback.suggestedTransliteration,
       language: feedback.language,
       native_language: feedback.nativeLanguage,
-      sound_link: soundUrl,
+      sound_link: '',
       types: feedback.types,
       content: feedback.content || ''
     };
