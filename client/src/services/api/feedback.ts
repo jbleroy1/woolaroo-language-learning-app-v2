@@ -5,7 +5,6 @@ import { Feedback } from 'services/entities/feedback';
 import { getLogger } from 'util/logging';
 
 interface APIFeedbackConfig {
-  addWordAudioEndpointURL: string;
   feedbackEndpointURL: string;
 }
 
