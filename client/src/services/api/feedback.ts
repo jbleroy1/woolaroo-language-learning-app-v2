@@ -29,7 +29,6 @@ export class APIFeedbackService implements IFeedbackService {
       suggested_transliteration: feedback.suggestedTransliteration ? feedback.suggestedTransliteration.toLowerCase() : feedback.suggestedTransliteration,
       language: feedback.language,
       native_language: feedback.nativeLanguage,
-      sound_link: '',
       types: feedback.types,
       content: feedback.content || ''
     };
