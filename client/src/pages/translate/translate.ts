@@ -259,18 +259,10 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 			return;
 		}
 
-		console.log(
-			"render share image",
-			this.backgroundImageData,
-			this.selectedWord
-		);
-
 		const language = this.i18n.currentLanguage;
 
 		const endangeredLanguage =
 			this.endangeredLanguageService.currentLanguage;
-
-		console.log("Before rendering image");
 
 		this.imageRenderingService
 			.renderImage(
@@ -317,13 +309,9 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 		word: WordTranslation;
 		translation: string;
 	}) {
-		console.log("word shared", word, translation);
-
 		const selectedTranslation = word.translations.find(
 			(trans) => trans.translation === translation
 		);
-
-		console.log("selected translation", selectedTranslation);
 
 		if (!selectedTranslation) {
 			logger.warn("Translation not found");
@@ -343,7 +331,6 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 			  }) || undefined
 			: undefined;
 		const img = this._sharedImage;
-		console.log("img", img, shareText);
 
 		if (!img) {
 			// image not rendered - default to sharing text
@@ -355,8 +342,6 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 			return;
 		}
 
-		console.log("Before files");
-
 		const files: File[] = [
 			new File(
 				[img],
@@ -366,7 +351,6 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 				}
 			),
 		];
-		console.log("Before sharing", files, shareText, shareTitle);
 
 		share({ text: shareText, title: shareTitle, files }).then(
 			() => {},

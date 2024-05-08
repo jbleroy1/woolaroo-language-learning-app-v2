@@ -19,8 +19,16 @@ const logger = getLogger("ChangeLanguagePageComponent");
 	styleUrls: ["./change-language.scss"],
 })
 export class ChangeLanguagePageComponent implements AfterViewInit {
-	showResults = false;
+	showResults = true;
 	private allLanguages: EndangeredLanguage[] = [];
+	allRegions = [
+		{ name: "Asia", code: "Asia" },
+		{ name: "Africa", code: "Africa" },
+		{ name: "Europe", code: "Europe" },
+		{ name: "North America", code: "North America" },
+		{ name: "South America", code: "South America" },
+		{ name: "Oceania", code: "Oceania" },
+	];
 
 	public get endangeredLanguages(): EndangeredLanguage[] {
 		return this.endangeredLanguageService.languages;
@@ -86,10 +94,6 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 	onEndangeredLanguageChanged(index: number) {
 		let _index = index;
 
-		console.log("on andangered language changed");
-
-		console.log(this.endangeredLanguageService.languages.length);
-
 		if (index > this.endangeredLanguages.length - 1) {
 			_index = 0;
 		}
@@ -131,13 +135,21 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 	onSearchLanguage(e: any) {
 		let _endangeredLanguages = this.allLanguages;
 
-		if (e.region !== "none" && e.region !== "" && e.region !== null) {
+		if (e.region === "all" && e.language === null) {
+			_endangeredLanguages = this.allLanguages;
+		} else if (
+			e.region !== "none" &&
+			e.region !== "" &&
+			e.region !== null
+		) {
 			_endangeredLanguages = this.allLanguages.filter(
 				(lan) => lan.region.toLowerCase() === e.region.toLowerCase()
 			);
-		}
-
-		if (e.language !== "none" && e.language !== "" && e.language !== null) {
+		} else if (
+			e.language !== "none" &&
+			e.language !== "" &&
+			e.language !== null
+		) {
 			_endangeredLanguages = this.allLanguages.filter((lan) =>
 				lan.name.includes(e.language)
 			);

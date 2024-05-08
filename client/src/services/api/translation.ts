@@ -89,13 +89,9 @@ export class APITranslationService implements ITranslationService {
 			target_language: targetLanguage,
 		};
 
-		console.log("payload: ", _payload);
-
 		const response = await this.http
 			.post<TranslationResponse[]>(this.config.endpointURL, _payload)
 			.toPromise();
-
-		console.log("response: ", response);
 
 		let translations = response.map((tr) => ({
 			english: tr.english_word,

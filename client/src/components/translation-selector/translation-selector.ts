@@ -69,12 +69,6 @@ export class TranslationSelectorComponent {
 	public defaultSelectedWordIndex = -1;
 
 	public get displayTranslation(): Translation | null {
-		console.log(
-			this.translations,
-			this.selectedWord,
-			this.selectedTranslation
-		);
-
 		if (!this.translations || !this.selectedWord) {
 			return null;
 		}

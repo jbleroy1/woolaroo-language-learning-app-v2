@@ -1,30 +1,29 @@
-<div class="filter-select">
-	<select [(ngModel)]="selectedRegion" (change)="languageToSearch = ''">
-		<option value="none" disabled>Filter language by region</option>
-		<option value="africa">Africa</option>
-		<option value="europe">Europe</option>
-		<option value="asia">Asia</option>
-		<option value="oceania">Oceania</option>
-		<option value="americas">Americas</option>
-	</select>
+<div class="regions">
+	<app-scroll-list
+		[currentItem]="regionIndex"
+		(currentItemChanged)="onRegionChanged($event)"
+		dir="ltr"
+	>
+		@for(reg of allRegions; track reg.name){
+		<ng-container>
+			<button *appScrollListItem>{{ reg.name }}</button>
+		</ng-container>
+		}
+	</app-scroll-list>
 </div>
-<div class="filter-span">
-	<span class="label" [innerHTML]="'or'"></span>
-</div>
-<div class="filter-input">
-	<input
-		placeholder="Search language by name"
-		(focus)="selectedRegion = 'none'"
-		[(ngModel)]="languageToSearch"
-	/>
+
+<div class="filter-button">
+	<button mat-flat-button color="accent" (click)="searchLanguage()">
+		<span [innerHTML]="'Go' | translate : 'go'"></span>
+	</button>
 </div>
 <div class="filter-button">
 	<button
 		mat-flat-button
-		color="accent"
-		class="next"
-		(click)="searchLanguage()"
+		color="warn"
+		(click)="searchLanguage('all')"
+		class="orange"
 	>
-		<span [innerHTML]="'Search for language'"></span>
+		<span [innerHTML]="'View All'"></span>
 	</button>
 </div>
