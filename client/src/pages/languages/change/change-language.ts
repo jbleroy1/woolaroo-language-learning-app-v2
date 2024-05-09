@@ -72,7 +72,9 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 				this.endangeredLanguageService.currentLanguage
 			);
 
-		this.allLanguages = this.endangeredLanguageService.languages;
+		this.allLanguages = this._sortLanguages(
+			this.endangeredLanguageService.languages
+		);
 	}
 
 	ngAfterViewInit() {
@@ -130,6 +132,20 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 				this.currentEndangeredLanguageIndex
 			].code;
 		await this.profileService.saveProfile(profile);
+	}
+
+	private _sortLanguages(
+		languages: EndangeredLanguage[]
+	): EndangeredLanguage[] {
+		return languages.sort((a, b) => {
+			if (a.name < b.name) {
+				return -1;
+			} else if (a.name > b.name) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
 	}
 
 	onSearchLanguage(e: any) {

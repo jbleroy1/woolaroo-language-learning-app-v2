@@ -84,6 +84,11 @@ export class TranslationSelectorComponent {
 		);
 	}
 
+	private _translationIndex = 0;
+	public get translationIndex(): number {
+		return this._translationIndex;
+	}
+
 	constructor() {}
 
 	onPlayAudioClick() {
@@ -190,12 +195,13 @@ export class TranslationSelectorComponent {
 		}
 	}
 
-	onTranslationSelectionChange(ev: { index: number }, _transalation: string) {
-		this.selectedTranslation = _transalation;
+	onTranslationSelectionChange(ev: number) {
+		this.selectedTranslation = this.selectedWord?.translations[ev]
+			?.translation as string | null;
 		this.selectedWordChanged.emit({
-			...ev,
+			index: undefined as unknown as number,
 			word: this.selectedWord,
-			translation: _transalation,
+			translation: this.selectedTranslation as string,
 		});
 	}
 

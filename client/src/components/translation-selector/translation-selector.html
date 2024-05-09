@@ -18,22 +18,19 @@
 		class="translation"
 		*ngIf="displayTranslation?.translation !== displayTranslation?.transliteration"
 	>
-		<span class="translation_count">
-			<span class="translation_count_container"
-				>{{selectedWord.translations.length}}</span
+		<div class="regions">
+			<app-scroll-list
+				[currentItem]="translationIndex"
+				(currentItemChanged)="onTranslationSelectionChange($event)"
+				dir="ltr"
 			>
-		</span>
-		<span class="word">
-			<select
-				(change)="onTranslationSelectionChange($event.index, $event.target.value)"
-			>
-				@for(_trans of selectedWord.translations; track trackTrans) {
-				<option value="{{_trans.translation}}">
-					{{_trans.translation}}
-				</option>
+				@for(_trans of selectedWord.translations; track trackTrans){
+				<ng-container>
+					<button *appScrollListItem>{{ _trans.translation }}</button>
+				</ng-container>
 				}
-			</select>
-		</span>
+			</app-scroll-list>
+		</div>
 		<span></span>
 		<span class="share">
 			<button
