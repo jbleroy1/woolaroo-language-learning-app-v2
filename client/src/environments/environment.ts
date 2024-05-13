@@ -459,7 +459,6 @@ export const environment = {
 		feedback: {
 			type: APIFeedbackService,
 			config: {
-				addWordAudioEndpointURL: `${baseEndpointUrl}/saveAudioSuggestions`,
 				feedbackEndpointURL: `https://cilex-woolaroo-2.uc.r.appspot.com/create_feedback/`,
 			},
 		},

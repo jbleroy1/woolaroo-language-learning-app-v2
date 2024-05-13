@@ -125,7 +125,6 @@ exports.create_feedback = async (req, res) => {
             req.body.transliteration || '',
             req.body.suggested_translation || '',
             req.body.suggested_transliteration || '',
-            req.body.sound_link || '',
             req.body.types ? req.body.types.join(', ') : '',
             req.body.content || '',
             new Date()
