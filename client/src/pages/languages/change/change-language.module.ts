@@ -8,6 +8,7 @@ import { IconComponentModule } from "../../../components/icon/icon.module";
 import { CameraPreviewModule } from "../../../components/camera-preview/camera-preview.module";
 import { ScrollListModule } from "../../../components/scroll-list/scroll-list.module";
 import { LanguageFilterModule } from "../../../components/language-filter/language-filter.module";
+import { PipesModule } from "../../../pipes/pipes.module";
 
 @NgModule({
 	declarations: [ChangeLanguagePageComponent],
@@ -21,6 +22,7 @@ import { LanguageFilterModule } from "../../../components/language-filter/langua
 		CameraPreviewModule,
 		ScrollListModule,
 		LanguageFilterModule,
+		PipesModule,
 	],
 })
 export class ChangeLanguageModule {}
