@@ -5,10 +5,14 @@ import { MockTranslationService } from "../services/mock/translation";
 import { params } from "./environment.prod.params";
 import { APIImageRecognitionService } from "../services/api/image-recognition";
 import { SafeSearchLikelihood } from "../services/google/image-recognition";
+import { MockImageRecognitionService } from "../services/mock/image-recognition";
+import { APITranslationService } from "../services/api/translation";
 
 const baseEndpointUrl =
 	"https://australia-southeast1-woolaroo-project.cloudfunctions.net";
+const localEndpointUrl = "http://localhost:8083";
 const debugImageUrl = "/assets/debug/IMG_20190920_141505.jpg";
+const newBaseURL = "https://woolaroo-b9v1uynn.uc.gateway.dev";
 
 export const environment = {
 	production: false,
@@ -221,9 +225,9 @@ export const environment = {
 					height: 50,
 					logoY: 8,
 					logoHeight: 20,
-					logoURL: "/assets/img/logo.png",
+					logoURL: "assets/img/logo.png",
 					attributionHeight: 20,
-					attributionURL: "/assets/img/google_arts_culture_logo.png",
+					attributionURL: "assets/img/google_arts_culture_logo.png",
 					spacing: 0,
 				},
 				padding: 20,
@@ -244,6 +248,7 @@ export const environment = {
 						organizationURL:
 							"https://www.yugambeh.com/learn-the-language",
 						organizationName: "Yugambeh Museum",
+						region: "Oceania",
 					},
 					{
 						code: "may",
@@ -256,6 +261,7 @@ export const environment = {
 						nativeSpeakers: "6000000",
 						organizationURL: "http://alin.inali.gob.mx/xmlui/",
 						organizationName: "INALI",
+						region: "Americas",
 					},
 					{
 						code: "yi",
@@ -269,6 +275,7 @@ export const environment = {
 						organizationURL:
 							"https://jewishstudies.rutgers.edu/yiddish/102-department-of-jewish-studies/yiddish/159-yiddish-faqs",
 						organizationName: "Department of Jewish Studies",
+						region: "Europe",
 					},
 					{
 						code: "tzm",
@@ -282,6 +289,7 @@ export const environment = {
 						organizationURL:
 							"https://www.congres-mondial-amazigh.org/",
 						organizationName: "Congres Mondial Amazigh",
+						region: "Africa",
 					},
 					{
 						code: "rap",
@@ -295,6 +303,7 @@ export const environment = {
 						organizationURL:
 							"https://en.unesco.org/courier/2019-1/rapa-nui-back-brink",
 						organizationName: "Council of the Elders of Rapa Nui",
+						region: "Oceania",
 					},
 					{
 						code: "ppl",
@@ -307,6 +316,7 @@ export const environment = {
 						nativeSpeakers: "100000",
 						organizationURL: "http://www.tushik.org",
 						organizationName: "Tushik",
+						region: "Americas",
 					},
 					{
 						code: "mi",
@@ -319,6 +329,7 @@ export const environment = {
 						nativeSpeakers: "100000",
 						organizationURL: "https://temurumara.org.nz/",
 						organizationName: "Te Murumāra Foundation",
+						region: "Oceania",
 					},
 					{
 						code: "el-cal",
@@ -331,6 +342,7 @@ export const environment = {
 						nativeSpeakers: "100000",
 						organizationURL: "https://calabriagreca.it/",
 						organizationName: "Associazione Ellenofona Jalò tu Vua",
+						region: "Europe",
 					},
 					{
 						code: "scn",
@@ -343,6 +355,7 @@ export const environment = {
 						nativeSpeakers: "100000",
 						organizationURL: "https://cademiasiciliana.org",
 						organizationName: "Cademia Siciliana",
+						region: "Europe",
 					},
 					{
 						code: "lou",
@@ -355,6 +368,7 @@ export const environment = {
 						nativeSpeakers: "100000",
 						organizationURL: "https://learnlouisianacreole.com/",
 						organizationName: "Ti Liv Kréyòl",
+						region: "Americas",
 					},
 					{
 						code: "zyg",
@@ -369,6 +383,7 @@ export const environment = {
 							"https://www.youtube.com/watch?v=WuN43huPnuM",
 						organizationName:
 							"Museum of Ethnic Cultures at Minzu University",
+						region: "Asia",
 					},
 					{
 						code: "kum",
@@ -381,6 +396,7 @@ export const environment = {
 						nativeSpeakers: "500",
 						organizationURL: "https://www.baronamuseum.com/",
 						organizationName: "Barona Cultural Center & Museum",
+						region: "Americas",
 					},
 					{
 						code: "tep",
@@ -393,6 +409,7 @@ export const environment = {
 						nativeSpeakers: "9000",
 						organizationURL: "http://alin.inali.gob.mx/xmlui/",
 						organizationName: "INALI",
+						region: "Americas",
 					},
 					{
 						code: "vm",
@@ -406,6 +423,7 @@ export const environment = {
 						organizationURL:
 							"https://www.newcastle.edu.au/research/centre/endangered-languages-documentation-theory-and-application",
 						organizationName: "University of Newcastle",
+						region: "Oceania",
 					},
 					{
 						code: "rom",
@@ -418,6 +436,7 @@ export const environment = {
 						nativeSpeakers: "7000",
 						organizationURL: "https://www.dialettoromagnolo.it/",
 						organizationName: "Friedrich Schürr Institute",
+						region: "Europe",
 					},
 					{
 						code: "san",
@@ -430,6 +449,7 @@ export const environment = {
 						nativeSpeakers: "14135",
 						organizationURL: "",
 						organizationName: "-",
+						region: "Asia",
 					},
 					{
 						code: "pot",
@@ -442,14 +462,18 @@ export const environment = {
 						nativeSpeakers: "7000",
 						organizationURL: "https://www.potawatomi.org/",
 						organizationName: "Citizen Potawatomi Nation",
+						region: "Americas",
 					},
 				],
 			},
 		},
 		translation: {
-			type: MockTranslationService,
+			// type: MockTranslationService,
+			type: APITranslationService,
 			config: {
-				endpointURL: `${baseEndpointUrl}/getTranslations`,
+				// endpointURL: `${baseEndpointUrl}/getTranslations`,
+				endpointURL: `${newBaseURL}/get_translations`,
+				// endpointURL: `${localEndpointUrl}`,
 			},
 		},
 		analytics: {
