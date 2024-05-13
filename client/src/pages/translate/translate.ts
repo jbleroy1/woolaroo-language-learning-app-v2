@@ -38,6 +38,13 @@ interface TranslatePageConfig {
 	debugWords?: string[];
 }
 
+interface PersistHistory {
+	image: Blob;
+	imageURL: string;
+	words: string[];
+	selectedWordIndex: number;
+}
+
 class WordsNotFoundError extends Error {}
 
 export const TRANSLATE_PAGE_CONFIG = new InjectionToken<TranslatePageConfig>(
@@ -56,6 +63,7 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 	public selectedWord: Translation | null = null;
 	public defaultSelectedWordIndex = -1;
 	public translations: WordTranslation[] | null = null;
+	private _persistedHistory: PersistHistory = {} as PersistHistory;
 
 	public get currentLanguage(): string {
 		return this.endangeredLanguageService.currentLanguage.name;
@@ -139,8 +147,6 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 		imageURL: string | undefined,
 		words: string[] | undefined
 	): Promise<void> {
-		console.log("init img translations", words);
-
 		if (!image) {
 			const debugImageUrl = this.config.debugImageUrl;
 			if (!debugImageUrl) {
@@ -191,6 +197,7 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 	}
 
 	setImageURL(url: string) {
+		this._persistedHistory = history.state;
 		this.backgroundImageURL = url;
 		const state = history.state;
 		state.imageURL = url;
@@ -200,7 +207,6 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 	async loadTranslations(words: string[]): Promise<void> {
 		let translations: WordTranslation[];
 		try {
-			console.log("words: ", words);
 			translations = await this.translationService.translate(
 				words,
 				this.i18n.currentLanguage.code,
@@ -247,7 +253,9 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 	}
 
 	onSwitchLanguageClick() {
-		this.router.navigateByUrl(AppRoutes.ChangeLanguage);
+		this.router.navigateByUrl(AppRoutes.ChangeLanguage, {
+			state: this._persistedHistory,
+		});
 	}
 
 	onBackClick() {

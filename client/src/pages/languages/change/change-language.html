@@ -1,4 +1,9 @@
+@if(imageUrl) {
+<div class="background" [style.backgroundImage]="imageUrl | styleUrl"></div>
+} @if(!imageUrl) {
 <app-camera-preview></app-camera-preview>
+}
+
 <button (click)="onCloseClick()" class="close" aria-label="Close">
 	<app-icon icon="close"></app-icon>
 </button>

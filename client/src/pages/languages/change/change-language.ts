@@ -10,6 +10,12 @@ import { loadCapturePageURL } from "../../../util/camera";
 import { AppRoutes } from "../../../app/routes";
 import { IProfileService, PROFILE_SERVICE } from "../../../services/profile";
 import { getLogger } from "../../../util/logging";
+interface PersistHistory {
+	image: Blob;
+	imageURL: string;
+	words: string[];
+	selectedWordIndex: number;
+}
 
 const logger = getLogger("ChangeLanguagePageComponent");
 
@@ -21,6 +27,7 @@ const logger = getLogger("ChangeLanguagePageComponent");
 export class ChangeLanguagePageComponent implements AfterViewInit {
 	showResults = true;
 	private allLanguages: EndangeredLanguage[] = [];
+	private _persistedHistory: PersistHistory = {} as PersistHistory;
 	allRegions = [
 		{ name: "Asia", code: "Asia" },
 		{ name: "Africa", code: "Africa" },
@@ -39,6 +46,10 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 
 	public get uiLanguages(): Language[] {
 		return this.i18nService.languages;
+	}
+
+	public get imageUrl(): string | null {
+		return this._persistedHistory.imageURL || null;
 	}
 
 	private _currentUILanguageIndex = 0;
@@ -75,6 +86,10 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 		this.allLanguages = this._sortLanguages(
 			this.endangeredLanguageService.languages
 		);
+	}
+
+	ngOnInit() {
+		this._persistedHistory = history.state;
 	}
 
 	ngAfterViewInit() {
@@ -116,8 +131,14 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 	onNextClick() {
 		this.saveSelectedLanguages().finally(() => {
 			loadCapturePageURL().then(
-				(url) => this.router.navigateByUrl(url),
-				() => this.router.navigateByUrl(AppRoutes.CaptureImage)
+				() => {
+					this.router.navigateByUrl(AppRoutes.Translate, {
+						state: history.state,
+					});
+				},
+				(url) => {
+					this.router.navigateByUrl(url);
+				}
 			);
 		});
 	}
