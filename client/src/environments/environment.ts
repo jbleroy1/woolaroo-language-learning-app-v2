@@ -12,7 +12,6 @@ const baseEndpointUrl =
 	"https://australia-southeast1-woolaroo-project.cloudfunctions.net";
 const localEndpointUrl = "http://localhost:8083";
 const debugImageUrl = "/assets/debug/IMG_20190920_141505.jpg";
-// const newBaseURL = " https://us-central1-cilex-woolaroo-2.cloudfunctions.net";
 const newBaseURL = "https://woolaroo-b9v1uynn.uc.gateway.dev";
 
 export const environment = {
