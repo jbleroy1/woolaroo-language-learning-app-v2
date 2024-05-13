@@ -61,6 +61,12 @@ export class TranslationSelectorComponent {
 	public audioState: AudioState = AudioState.Stopped;
 	public lineTargetPosition: Point | null = null;
 
+	onKeyDown(event: KeyboardEvent): void {
+		if (event.key === "Enter") {
+			this.onAddTranslationClick();
+		}
+	}
+
 	public selectedTranslation: string | null = null;
 
 	public selectedWordVisible = false;

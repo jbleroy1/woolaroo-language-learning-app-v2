@@ -106,31 +106,7 @@ async function saveFeedback(spreadsheetId, sheetTitle, data) {
     });
 }
 
-exports.addSuggestions = async (req, res) => {
-    addSecurityHeaders(res);
-    return cors(req, res, async () => {
-        if (!validation.isTargetLanguage(req.body.native_language)) {
-            res.status(400).send("Invalid target language");
-            return;
-        } else if(!validation.isPrimaryLanguage(req.body.language)) {
-            res.status(400).send("Invalid primary language");
-            return;
-        }
-        await saveFeedback(process.env['SUGGESTIONS_SPREADSHEET'], req.body.native_language, [
-            req.body.language || '',
-            req.body.native_language || '',
-            req.body.english_word || '',
-            req.body.primary_word || '',
-            req.body.translation || '',
-            req.body.transliteration || '',
-            req.body.sound_link || '',
-            new Date()
-        ]);
-        res.status(200).send("Translation suggestions saved.");
-    });
-};
-
-exports.addFeedback = async (req, res) => {
+exports.create_feedback = async (req, res) => {
     addSecurityHeaders(res);
     return cors(req, res, async () => {
         if (!validation.isTargetLanguage(req.body.native_language)) {
@@ -147,7 +123,8 @@ exports.addFeedback = async (req, res) => {
             req.body.primary_word || '',
             req.body.translation || '',
             req.body.transliteration || '',
-            req.body.sound_link || '',
+            req.body.suggested_translation || '',
+            req.body.suggested_transliteration || '',
             req.body.types ? req.body.types.join(', ') : '',
             req.body.content || '',
             new Date()

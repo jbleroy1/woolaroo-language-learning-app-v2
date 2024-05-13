@@ -73,7 +73,11 @@
 	[class.hidden]="!selectedWordVisible"
 	*ngIf="selectedWord && !displayTranslation?.translation"
 >
-	<div class="message" (click)="onAddTranslationClick()">
+	<div
+		class="message"
+		(click)="onAddTranslationClick()"
+		(keydown)="onKeyDown($event)"
+	>
 		<app-icon icon="add" shadow="true"></app-icon>
 		<span [innerHTML]="'Add word' | translate:'addWord'"></span>
 	</div>

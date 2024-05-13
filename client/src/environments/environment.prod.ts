@@ -403,8 +403,7 @@ export const environment = {
       type: APIFeedbackService,
       config: {
         addWordAudioEndpointURL: `${params.apiUrl}/saveAudioSuggestions`,
-        addWordEndpointURL: `${params.apiUrl}/addSuggestions`,
-        feedbackEndpointURL: `${params.apiUrl}/addFeedback`
+        feedbackEndpointURL: `https://cilex-woolaroo-2.uc.r.appspot.com/create_feedback/`,
       }
     }
   }
