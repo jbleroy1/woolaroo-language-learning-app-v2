@@ -1,5 +1,5 @@
 import { Inject, Injectable, InjectionToken } from "@angular/core";
-import { Translation, WordTranslation } from "./entities/translation";
+import { Translation } from "./entities/translation";
 import { canvasToBlob } from "../util/image";
 import { I18nService, Language } from "../i18n/i18n.service";
 import { EndangeredLanguage } from "./endangered-language";

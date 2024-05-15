@@ -326,7 +326,6 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 			return;
 		}
 
-		// const selectedWord = this.selectedWord;
 		const shareTitle = this.i18n.getTranslation("shareTitle") || undefined;
 		const shareText = selectedTranslation
 			? this.i18n.getTranslation("shareText", {
