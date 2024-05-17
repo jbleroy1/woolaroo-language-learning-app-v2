@@ -30,6 +30,7 @@ import { NotSupportedError } from "../../util/errors";
 import { validateImageData, validateImageURL } from "../../util/image";
 import { loadCapturePageURL } from "../../util/camera";
 import { getLogger } from "../../util/logging";
+import { isMobileDevice } from "../../util/platform";
 
 const logger = getLogger("TranslatePageComponent");
 
@@ -67,6 +68,10 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 
 	public get currentLanguage(): string {
 		return this.endangeredLanguageService.currentLanguage.name;
+	}
+
+	public get deviceSupported(): boolean {
+		return isMobileDevice();
 	}
 
 	constructor(
@@ -326,7 +331,6 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 			return;
 		}
 
-		// const selectedWord = this.selectedWord;
 		const shareTitle = this.i18n.getTranslation("shareTitle") || undefined;
 		const shareText = selectedTranslation
 			? this.i18n.getTranslation("shareText", {
