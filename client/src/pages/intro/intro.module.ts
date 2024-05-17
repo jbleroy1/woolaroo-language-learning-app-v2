@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { FormsModule } from "@angular/forms";
 import { ScrollListModule } from "../../components/scroll-list/scroll-list.module";
 import { LogoModule } from "../../components/logo/logo.module";
 import { PaginationIndicatorModule } from "../../components/pagination-indicator/pagination-indicator.module";
@@ -15,6 +17,8 @@ import { CommonModule } from "@angular/common";
 		RouterModule,
 		CommonModule,
 		MatButtonModule,
+		MatCheckboxModule,
+		FormsModule,
 		PaginationIndicatorModule,
 		I18nModule,
 		ScrollListModule,

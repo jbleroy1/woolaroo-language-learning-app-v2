@@ -1,28 +1,14 @@
-<div
-	class="background"
-	[style.backgroundImage]="backgroundImageURL | styleUrl"
-></div>
+<div class="background" [style.backgroundImage]="backgroundImageURL | styleUrl"></div>
 <app-toolbar>
-	<button class="back" (click)="onBackClick()" slot="start">
+    <button class="back" (click)="onBackClick()" slot="start">
 		<app-icon icon="arrow_back"></app-icon>
 	</button>
-	<button
-		(click)="onSubmitFeedbackClick()"
-		class="submit-feedback"
-		slot="end"
-	>
+    <button (click)="onSubmitFeedbackClick()" class="submit-feedback" slot="end">
 		<app-icon icon="add_feedback"></app-icon>
 	</button>
 </app-toolbar>
-<app-translation-selector
-	[translations]="translations"
-	[defaultSelectedWordIndex]="defaultSelectedWordIndex"
-	(addRecording)="onAddRecording($event)"
-	(addTranslation)="onAddTranslation($event)"
-	(wordShared)="onWordShared($event)"
-	(selectedWordChanged)="onSelectedWordChanged($event)"
-	(manualEntrySelected)="onManualEntrySelected()"
->
+<app-translation-selector [translations]="translations" [defaultSelectedWordIndex]="defaultSelectedWordIndex" (addRecording)="onAddRecording($event)" (addTranslation)="onAddTranslation($event)" (wordShared)="onWordShared($event)" (selectedWordChanged)="onSelectedWordChanged($event)"
+    (manualEntrySelected)="onManualEntrySelected()">
 </app-translation-selector>
 <button class="current-language" (click)="onViewLanguageClick()">
 	<span>{{currentLanguage}}</span> <app-icon icon="read_more"></app-icon>

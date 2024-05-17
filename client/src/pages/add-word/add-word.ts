@@ -132,6 +132,8 @@ export class AddWordPageComponent implements AfterViewInit {
 					}, environment.components.snackBar.duration + 500);
 				},
 				(err) => {
+					console.log(err);
+
 					logger.warn("Failed adding word", err);
 					const errorMessage =
 						this.i18n.getTranslation("sendFeedbackError") ||
