@@ -3,8 +3,10 @@ import {
 	Inject,
 	Injectable,
 	InjectionToken,
+	OnInit,
 } from "@angular/core";
 import { getLogger } from "../util/logging";
+import { HttpClient } from "@angular/common/http";
 
 const logger = getLogger("EndangeredLanguageService");
 
@@ -23,13 +25,16 @@ export interface EndangeredLanguage {
 
 interface EndangeredLanguageConfig {
 	languages: EndangeredLanguage[];
+	endangeredLanguageEndpoint: string;
 }
 
 export const ENDANGERED_LANGUAGE_CONFIG =
 	new InjectionToken<EndangeredLanguageConfig>("Endangered language config");
 
 @Injectable()
-export class EndangeredLanguageService {
+export class EndangeredLanguageService implements OnInit {
+	private _contextLanguages: EndangeredLanguage[] = [];
+
 	private _currentLanguage: EndangeredLanguage;
 	public get currentLanguage(): EndangeredLanguage {
 		return this._currentLanguage;
@@ -44,12 +49,33 @@ export class EndangeredLanguageService {
 
 	constructor(
 		@Inject(ENDANGERED_LANGUAGE_CONFIG)
-		private config: EndangeredLanguageConfig
+		private config: EndangeredLanguageConfig,
+		private http: HttpClient
 	) {
+		this._getFilteredLanguages("africa");
 		const defaultLanguage = this.config.languages.find(
 			(lang) => lang.default
 		);
 		this._currentLanguage = defaultLanguage || this.config.languages[0];
+	}
+
+	ngOnInit(): void {
+		console.log(
+			"EndangeredLanguageService initialized",
+			this._contextLanguages
+		);
+	}
+
+	private async _getFilteredLanguages(region: string = "all") {
+		const _formData = new FormData();
+		_formData.append("region", region);
+		const resp = await this.http
+			.post<EndangeredLanguage[]>(
+				this.config.endangeredLanguageEndpoint,
+				_formData
+			)
+			.toPromise();
+		this._contextLanguages = resp;
 	}
 
 	public setLanguage(code: string) {
