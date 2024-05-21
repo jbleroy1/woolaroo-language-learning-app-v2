@@ -32,10 +32,10 @@ export const ENDANGERED_LANGUAGE_CONFIG =
 	new InjectionToken<EndangeredLanguageConfig>("Endangered language config");
 
 @Injectable()
-export class EndangeredLanguageService implements OnInit {
+export class EndangeredLanguageService {
 	private _contextLanguages: EndangeredLanguage[] = [];
 
-	private _currentLanguage: EndangeredLanguage;
+	private _currentLanguage: EndangeredLanguage = {} as EndangeredLanguage;
 	public get currentLanguage(): EndangeredLanguage {
 		return this._currentLanguage;
 	}
@@ -44,7 +44,7 @@ export class EndangeredLanguageService implements OnInit {
 		new EventEmitter();
 
 	public get languages(): EndangeredLanguage[] {
-		return this.config.languages;
+		return this._contextLanguages;
 	}
 
 	constructor(
@@ -52,18 +52,7 @@ export class EndangeredLanguageService implements OnInit {
 		private config: EndangeredLanguageConfig,
 		private http: HttpClient
 	) {
-		this._getFilteredLanguages("africa");
-		const defaultLanguage = this.config.languages.find(
-			(lang) => lang.default
-		);
-		this._currentLanguage = defaultLanguage || this.config.languages[0];
-	}
-
-	ngOnInit(): void {
-		console.log(
-			"EndangeredLanguageService initialized",
-			this._contextLanguages
-		);
+		this._getFilteredLanguages();
 	}
 
 	private async _getFilteredLanguages(region: string = "all") {
@@ -76,13 +65,20 @@ export class EndangeredLanguageService implements OnInit {
 			)
 			.toPromise();
 		this._contextLanguages = resp;
+		const defaultLanguage = resp.find((lang) => lang.default);
+
+		this._currentLanguage = defaultLanguage || resp[0];
 	}
 
 	public setLanguage(code: string) {
-		if (code === this._currentLanguage.code) {
+		if (
+			code === this._currentLanguage.code ||
+			this._contextLanguages.length === 0
+		) {
 			return;
 		}
-		const newLanguage = this.config.languages.find(
+
+		const newLanguage = this._contextLanguages.find(
 			(lang) => lang.code === code
 		);
 		if (!newLanguage) {
@@ -94,7 +90,7 @@ export class EndangeredLanguageService implements OnInit {
 	}
 
 	public setLanguages(languages: EndangeredLanguage[]) {
-		this.config.languages = languages;
+		this._contextLanguages = languages;
 		this._currentLanguage = languages[0];
 	}
 }

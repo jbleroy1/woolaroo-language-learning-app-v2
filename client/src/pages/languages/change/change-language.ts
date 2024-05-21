@@ -64,7 +64,8 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 
 	public get currentEndangeredLanguageDescriptionKey(): string {
 		const code =
-			this.endangeredLanguages[this._currentEndangeredLanguageIndex].code;
+			this.endangeredLanguages[this._currentEndangeredLanguageIndex]
+				?.code;
 		return `shortDescription_${code}`;
 	}
 
