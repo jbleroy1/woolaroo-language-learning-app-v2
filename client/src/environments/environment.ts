@@ -465,6 +465,7 @@ export const environment = {
 						region: "Americas",
 					},
 				],
+				endangeredLanguageEndpoint: `${newBaseURL}/get_region_languages`,
 			},
 		},
 		translation: {

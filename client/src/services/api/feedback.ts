@@ -48,7 +48,6 @@ export class APIFeedbackService implements IFeedbackService {
 				responseType: "text",
 			})
 			.toPromise();
-		console.log("resp", resp);
 
 		logger.log("Feedback sent");
 	}

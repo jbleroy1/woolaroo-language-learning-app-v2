@@ -3,8 +3,10 @@ import {
 	Inject,
 	Injectable,
 	InjectionToken,
+	OnInit,
 } from "@angular/core";
 import { getLogger } from "../util/logging";
+import { HttpClient } from "@angular/common/http";
 
 const logger = getLogger("EndangeredLanguageService");
 
@@ -23,6 +25,7 @@ export interface EndangeredLanguage {
 
 interface EndangeredLanguageConfig {
 	languages: EndangeredLanguage[];
+	endangeredLanguageEndpoint: string;
 }
 
 export const ENDANGERED_LANGUAGE_CONFIG =
@@ -30,7 +33,9 @@ export const ENDANGERED_LANGUAGE_CONFIG =
 
 @Injectable()
 export class EndangeredLanguageService {
-	private _currentLanguage: EndangeredLanguage;
+	private _contextLanguages: EndangeredLanguage[] = [];
+
+	private _currentLanguage: EndangeredLanguage = {} as EndangeredLanguage;
 	public get currentLanguage(): EndangeredLanguage {
 		return this._currentLanguage;
 	}
@@ -39,24 +44,41 @@ export class EndangeredLanguageService {
 		new EventEmitter();
 
 	public get languages(): EndangeredLanguage[] {
-		return this.config.languages;
+		return this._contextLanguages;
 	}
 
 	constructor(
 		@Inject(ENDANGERED_LANGUAGE_CONFIG)
-		private config: EndangeredLanguageConfig
+		private config: EndangeredLanguageConfig,
+		private http: HttpClient
 	) {
-		const defaultLanguage = this.config.languages.find(
-			(lang) => lang.default
-		);
-		this._currentLanguage = defaultLanguage || this.config.languages[0];
+		this._getFilteredLanguages();
+	}
+
+	private async _getFilteredLanguages(region: string = "all") {
+		const _formData = new FormData();
+		_formData.append("region", region);
+		const resp = await this.http
+			.post<EndangeredLanguage[]>(
+				this.config.endangeredLanguageEndpoint,
+				_formData
+			)
+			.toPromise();
+		this._contextLanguages = resp;
+		const defaultLanguage = resp.find((lang) => lang.default);
+
+		this._currentLanguage = defaultLanguage || resp[0];
 	}
 
 	public setLanguage(code: string) {
-		if (code === this._currentLanguage.code) {
+		if (
+			code === this._currentLanguage.code ||
+			this._contextLanguages.length === 0
+		) {
 			return;
 		}
-		const newLanguage = this.config.languages.find(
+
+		const newLanguage = this._contextLanguages.find(
 			(lang) => lang.code === code
 		);
 		if (!newLanguage) {
@@ -68,7 +90,7 @@ export class EndangeredLanguageService {
 	}
 
 	public setLanguages(languages: EndangeredLanguage[]) {
-		this.config.languages = languages;
+		this._contextLanguages = languages;
 		this._currentLanguage = languages[0];
 	}
 }
