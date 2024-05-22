@@ -52,7 +52,16 @@ export class EndangeredLanguageService {
 		private config: EndangeredLanguageConfig,
 		private http: HttpClient
 	) {
-		this._getFilteredLanguages();
+		this._getFilteredLanguages().then(() => {
+			const storedLanguageCode = localStorage.getItem('currentLanguage');
+			if (storedLanguageCode) {
+				const storedLanguage = this._contextLanguages.find(
+					lang => lang.code === storedLanguageCode);
+				if (storedLanguage) {
+					this._currentLanguage = storedLanguage;
+				}
+			}
+		});
 	}
 
 	private async _getFilteredLanguages(region: string = "all") {
@@ -87,6 +96,7 @@ export class EndangeredLanguageService {
 		logger.log("Endangered language changed: " + code);
 		this._currentLanguage = newLanguage;
 		this.currentLanguageChanged.emit(this._currentLanguage.code);
+		localStorage.setItem('currentLanguage', code);
 	}
 
 	public setLanguages(languages: EndangeredLanguage[]) {
