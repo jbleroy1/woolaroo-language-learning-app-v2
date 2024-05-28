@@ -127,7 +127,7 @@ export class ScrollListComponent implements AfterViewInit, OnDestroy {
 	ngOnDestroy() {
 		window.removeEventListener("resize", this.onWindowResize);
 		document.removeEventListener("keyup", this.onDocumentKeyUp);
-	  }	  
+	}
 
 	onWindowResize = () => {
 		this.alignItems();
@@ -153,7 +153,9 @@ export class ScrollListComponent implements AfterViewInit, OnDestroy {
 
 	@HostListener("touchstart", ["$event"])
 	onTouchStart(ev: TouchEvent) {
-		window.document.body.addEventListener("touchmove", this.onTouchMove, { passive: true });
+		window.document.body.addEventListener("touchmove", this.onTouchMove, {
+			passive: false,
+		});
 		window.document.body.addEventListener("touchend", this.onTouchEnd);
 		const touch = ev.touches[0];
 		this.startDrag(touch.clientX, touch.clientY);
@@ -183,7 +185,7 @@ export class ScrollListComponent implements AfterViewInit, OnDestroy {
 			setTimeout(this.clearClickHandlers, 1);
 		}
 		this.stopDrag();
-	};
+	}
 
 	onMouseUp = () => {
 		window.document.body.removeEventListener("mousemove", this.onMouseMove);
@@ -219,10 +221,10 @@ export class ScrollListComponent implements AfterViewInit, OnDestroy {
 	};
 
 	@HostListener("touchmove", ["$event"])
-	onTouchMove(ev: TouchEvent) {
-	ev.preventDefault();
-	const touch = ev.touches[0];
-	this.updateDrag(touch.clientX, touch.clientY);
+	onTouchMove = (ev: TouchEvent) => {
+		ev.preventDefault();
+		const touch = ev.touches[0];
+		this.updateDrag(touch.clientX, touch.clientY);
 	};
 
 	onMouseMove = (ev: MouseEvent) => {
