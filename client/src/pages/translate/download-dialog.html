@@ -1,0 +1,17 @@
+<mat-dialog-content>
+    <div>
+        <span>Copy link to share</span>
+    </div>
+    <div class="link-container" (click)="copyLink()">
+        <!-- <p class="mat-body-4" [innerHTML]="uploadedFile"></p> -->
+        <p class="mat-body-4">Click here to copy shareable link.</p>
+    </div>
+    @if(linkCopied) {
+    <div class="copied">
+        <span>Copied...</span>
+    </div>
+    }
+    <button mat-flat-button color="accent" (click)="download()" class="next orange">
+		Download
+	</button>
+</mat-dialog-content>

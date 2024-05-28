@@ -70,6 +70,7 @@ export class APITranslationService implements ITranslationService {
 		maxTranslations: number = 0
 	): Promise<WordTranslation[]> {
 		const lowercaseWords = englishWords.map((w) => w.toLowerCase());
+		const storedLanguageCode = localStorage.getItem("currentLanguage");
 		const newRequest: TranslateRequest = {
 			words: lowercaseWords,
 			primaryLanguage,
@@ -86,7 +87,7 @@ export class APITranslationService implements ITranslationService {
 		const _payload = {
 			english_words: lowercaseWords,
 			primary_language: primaryLanguage,
-			target_language: targetLanguage,
+			target_language: targetLanguage || storedLanguageCode,
 		};
 
 		const response = await this.http
