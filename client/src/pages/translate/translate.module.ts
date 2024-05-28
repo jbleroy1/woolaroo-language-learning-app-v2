@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
 import { TranslatePageComponent, TRANSLATE_PAGE_CONFIG } from "./translate";
 import { ServicesModule } from "../../services/services.module";
 import { IconComponentModule } from "../../components/icon/icon.module";
@@ -19,6 +20,7 @@ import { AppToolbarModule } from "../../components/app-toolbar/app-toolbar.modul
 		ServicesModule,
 		I18nModule,
 		AppToolbarModule,
+		MatDialogModule,
 	],
 	providers: [
 		{

@@ -8,7 +8,13 @@ import {
 } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import {
+	MAT_DIALOG_DATA,
+	MatDialog,
+	MatDialogContent,
+	MatDialogRef,
+	MatDialogTitle,
+} from "@angular/material/dialog";
 import {
 	Translation,
 	WordTranslation,
@@ -52,6 +58,62 @@ export const TRANSLATE_PAGE_CONFIG = new InjectionToken<TranslatePageConfig>(
 	"Translate page config"
 );
 
+export interface DialogData {
+	image: Blob;
+	filename: string;
+}
+
+@Component({
+	selector: "app-download-dialog",
+	templateUrl: "download-dialog.html",
+	styleUrls: ["./translate.scss"],
+	standalone: true,
+	imports: [MatDialogTitle, MatDialogContent],
+})
+export class DownnloadDialog {
+	private _uploadedFile: string = "";
+	public get uploadedFile(): string {
+		return this._uploadedFile;
+	}
+
+	linkCopied = false;
+
+	constructor(
+		@Inject(MAT_DIALOG_DATA) public data: DialogData,
+		private http: HttpClient
+	) {
+		this._uploadImage(data);
+	}
+
+	private async _uploadImage(data: DialogData) {
+		const formData = new FormData();
+		formData.append("file", data.image);
+		const response = await this.http
+			.post<any>(
+				"https://woolaroo-b9v1uynn.uc.gateway.dev/upload_image",
+				formData
+			)
+			.toPromise();
+		this._uploadedFile = `https://storage.googleapis.com/woolaroo_images//${response.filename}`;
+	}
+
+	copyLink() {
+		navigator.clipboard.writeText(this._uploadedFile);
+		this.linkCopied = true;
+		setTimeout(() => {
+			this.linkCopied = false;
+		}, 3000);
+	}
+
+	download() {
+		try {
+			downloadFile(this.data.image, this.data.filename);
+		} catch (err) {
+			logger.warn("Error downloading image", err);
+		}
+	}
+}
+
 @Component({
 	selector: "app-page-translate",
 	templateUrl: "./translate.html",
@@ -65,6 +127,7 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 	public defaultSelectedWordIndex = -1;
 	public translations: WordTranslation[] | null = null;
 	private _persistedHistory: PersistHistory = {} as PersistHistory;
+	private _downloadData: DialogData = {} as DialogData;
 
 	public get currentLanguage(): string {
 		return this.endangeredLanguageService.currentLanguage.name;
@@ -87,7 +150,11 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 		private translationService: ITranslationService,
 		@Inject(ANALYTICS_SERVICE) private analyticsService: IAnalyticsService,
 		private imageRenderingService: ImageRenderingService
-	) {}
+	) {
+		// this.dialog.open(DownnloadDialog, {
+		// 	data: {},
+		// });
+	}
 
 	ngOnInit() {
 		this.analyticsService.logPageView(this.router.url, "Translate");
@@ -370,14 +437,17 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 				logger.warn("Error sharing image", ex);
 				if (ex instanceof NotSupportedError) {
 					// sharing not supported - default to downloading image
-					try {
-						downloadFile(
-							img,
-							`woolaroo-translation-${selectedTranslation.original}.jpg`
-						);
-					} catch (err) {
-						logger.warn("Error downloading image", err);
-					}
+					this._downloadData = {
+						image: img,
+						filename: `woolaroo-translation-${
+							selectedTranslation.original ||
+							selectedTranslation.english
+						}.jpg`,
+					};
+
+					this.dialog.open(DownnloadDialog, {
+						data: this._downloadData,
+					});
 				}
 			}
 		);

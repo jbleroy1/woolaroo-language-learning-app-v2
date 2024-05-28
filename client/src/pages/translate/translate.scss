@@ -80,3 +80,59 @@ mat-toolbar {
         }
     }
 }
+
+.next {
+    width: calc(100vw - 80px);
+    max-width: 320px;
+    flex: 0 0 auto;
+    border: none;
+    outline: none;
+    color: #fff;
+    height: 40px;
+    border-radius: 3px;
+    font-size: 16px;
+    :hover {
+        cursor: pointer;
+    }
+}
+
+.orange {
+    background-color: #f59a41 !important;
+}
+
+.link-container {
+    background-color: lighten(mat.get-color-from-palette($app-inverted), 70);
+    width: calc(100vw - 80px);
+    max-width: 320px;
+    height: 40px;
+    border: none;
+    color: mat.get-color-from-palette($app-accent);
+    font-weight: 400;
+    padding: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    word-wrap: break-word;
+    text-align: center;
+    display: grid;
+    place-items: center;
+    :hover {
+        cursor: pointer;
+        background-color: lighten( mat.get-color-from-palette($app-inverted), 68);
+    }
+    p {
+        font-size: 12px;
+        text-decoration: wavy;
+        width: 100%;
+        text-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+}
+
+.copied {
+    // color: mat.get-color-from-palette($app-accent);
+    font-size: 12px;
+    margin-bottom: 15px;
+}
