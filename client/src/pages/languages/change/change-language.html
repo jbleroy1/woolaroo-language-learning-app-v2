@@ -28,7 +28,7 @@
 	<div class="language-filter">
 		<span
 			class="label"
-			[innerHTML]="'I\'d like to explore a language.'"
+			[innerHTML]="'I\'d like to explore a language.' | translate:'language_by_region'"
 		></span>
 		<app-language-filter
 			(onSearchLanguage)="onSearchLanguage($event)"
@@ -52,7 +52,7 @@
 		</app-scroll-list>
 		<span
 			class="description"
-			[innerHTML]="'Description'|translate:currentEndangeredLanguageDescriptionKey"
+			[innerHTML]="'Description'|translate:currentEndangeredLanguageCode"
 		></span>
 	</div>
 	<button mat-flat-button color="accent" (click)="onNextClick()" class="next">
@@ -64,7 +64,7 @@
 		(click)="showResults = false"
 		class="next orange"
 	>
-		<span [innerHTML]="'View by region'"></span>
+		<span [innerHTML]="'View by region'| translate:'view_by_region'"></span>
 	</button>
 	}
 </div>

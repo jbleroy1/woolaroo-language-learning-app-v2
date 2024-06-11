@@ -93,7 +93,6 @@ export class I18nService {
 		if (!this._translations) {
 			return null;
 		} else if (!this._translations[key]) {
-			// logger.warn("Translation not found: " + key);
 			return null;
 		} else {
 			const translation = this._translations[key];

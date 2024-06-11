@@ -28,14 +28,14 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 	showResults = true;
 	private allLanguages: EndangeredLanguage[] = [];
 	private _persistedHistory: PersistHistory = {} as PersistHistory;
-	allRegions = [
-		{ name: "Asia", code: "Asia" },
-		{ name: "Africa", code: "Africa" },
-		{ name: "Europe", code: "Europe" },
-		{ name: "North America", code: "North America" },
-		{ name: "South America", code: "South America" },
-		{ name: "Oceania", code: "Oceania" },
-	];
+
+	public get allRegions(): { name: string; code: string }[] {
+		return this.getRegs();
+	}
+
+	private getRegs = () => {
+		return this.endangeredLanguageService.displayRegions;
+	};
 
 	public get endangeredLanguages(): EndangeredLanguage[] {
 		return this.endangeredLanguageService.languages;
@@ -67,6 +67,13 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 			this.endangeredLanguages[this._currentEndangeredLanguageIndex]
 				?.code;
 		return `shortDescription_${code}`;
+	}
+
+	public get currentEndangeredLanguageCode(): string {
+		const code =
+			this.endangeredLanguages[this._currentEndangeredLanguageIndex]
+				?.code;
+		return code;
 	}
 
 	constructor(
@@ -106,7 +113,7 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 
 	onUILanguageChanged(index: number) {
 		this._currentUILanguageIndex = index;
-		this.i18nService.setLanguage(this.i18nService.languages[index].code);
+		this.i18nService.setLanguage(this.i18nService.languages[index]?.code);
 	}
 
 	onEndangeredLanguageChanged(index: number) {
@@ -148,11 +155,11 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 		// save the language preferences, in case use did not change language
 		const profile = await this.profileService.loadProfile();
 		profile.language =
-			this.i18nService.languages[this.currentUILanguageIndex].code;
+			this.i18nService.languages[this.currentUILanguageIndex]?.code;
 		profile.endangeredLanguage =
 			this.endangeredLanguageService.languages[
 				this.currentEndangeredLanguageIndex
-			].code;
+			]?.code;
 		await this.profileService.saveProfile(profile);
 	}
 

@@ -30,7 +30,7 @@ export class LanguageFilterComponent {
 
 	onRegionChanged(index: number) {
 		let _index = index;
-		this.selectedRegion = this.allRegions[_index].name;
+		this.selectedRegion = this.allRegions[_index].code;
 	}
 
 	searchLanguage(filter?: string): void {
@@ -41,6 +41,7 @@ export class LanguageFilterComponent {
 			});
 			return;
 		}
+
 		this.onSearchLanguage.emit({
 			region: this.selectedRegion,
 			language: this.languageToSearch,

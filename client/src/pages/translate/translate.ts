@@ -67,8 +67,8 @@ export interface DialogData {
 	selector: "app-download-dialog",
 	templateUrl: "download-dialog.html",
 	styleUrls: ["./translate.scss"],
-	standalone: true,
-	imports: [MatDialogTitle, MatDialogContent],
+	// standalone: true,
+	// imports: [MatDialogTitle, MatDialogContent],
 })
 export class DownnloadDialog {
 	private _uploadedFile: string = "";
@@ -150,11 +150,7 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 		private translationService: ITranslationService,
 		@Inject(ANALYTICS_SERVICE) private analyticsService: IAnalyticsService,
 		private imageRenderingService: ImageRenderingService
-	) {
-		// this.dialog.open(DownnloadDialog, {
-		// 	data: {},
-		// });
-	}
+	) {}
 
 	ngOnInit() {
 		this.analyticsService.logPageView(this.router.url, "Translate");

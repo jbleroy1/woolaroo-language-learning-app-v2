@@ -63,6 +63,8 @@ export class WordScrollListComponent implements AfterViewChecked {
 	}
 	@Input("translations")
 	public set translations(value: WordTranslation[] | null) {
+		console.log("translations changed", value);
+
 		this._translations = value;
 		this.translationsChanged = true;
 		if (this._translations) {

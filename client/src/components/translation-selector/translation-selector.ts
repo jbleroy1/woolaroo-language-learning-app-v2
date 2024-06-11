@@ -148,10 +148,11 @@ export class TranslationSelectorComponent {
 			// don't set selectedWord to null - we don't want to immediately hide translation, but transition out
 			if (ev.word) {
 				this.selectedWord = ev.word;
-				this.selectedTranslation = ev.word.translations[0].translation;
+
+				this.selectedTranslation = ev.word.translations[0]?.translation;
 				this.selectedWordChanged.emit({
 					...ev,
-					translation: ev.word.translations[0].translation,
+					translation: ev.word.translations[0]?.translation,
 				});
 			}
 		}, 1);

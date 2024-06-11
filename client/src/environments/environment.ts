@@ -163,7 +163,7 @@ export const environment = {
 		imageRecognition: {
 			type: APIImageRecognitionService,
 			config: {
-				endpointURL: `${baseEndpointUrl}/visionAPI`,
+				endpointURL: `${newBaseURL}/visionAPI/`,
 				maxFileSize: 15 * 1024,
 				validImageFormats: [
 					"image/png",
@@ -466,6 +466,7 @@ export const environment = {
 					},
 				],
 				endangeredLanguageEndpoint: `${newBaseURL}/get_region_languages`,
+				regionEndpoint: `${newBaseURL}/get_regions`,
 			},
 		},
 		translation: {

@@ -1,16 +1,16 @@
 <mat-dialog-content>
     <div>
-        <span>Copy link to share</span>
+        <span [innerHtml]="'Copy link to share' | translate: 'link_to_share'"></span>
     </div>
     <div class="link-container" (click)="copyLink()" onKeyPress="" onKeyDown="" onKeyUp="">
-        <p class="mat-body-4">Click here to copy shareable link.</p>
+        <p class="mat-body-4" [innerHTML]="'Click here to copy shareable link' | translate: 'shareable_link'"></p>
     </div>
     @if(linkCopied) {
     <div class="copied">
-        <span>Copied...</span>
+        <span [innerHtml]="'Copied' | translate: 'copied'"></span>
     </div>
     }
     <button mat-flat-button color="accent" (click)="download()" class="next orange">
-		Download
+		<span [innerHTML]="'Download' | translate : 'download'"></span>
 	</button>
 </mat-dialog-content>

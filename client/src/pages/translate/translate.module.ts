@@ -1,7 +1,11 @@
 import { NgModule } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
-import { TranslatePageComponent, TRANSLATE_PAGE_CONFIG } from "./translate";
+import {
+	TranslatePageComponent,
+	TRANSLATE_PAGE_CONFIG,
+	DownnloadDialog,
+} from "./translate";
 import { ServicesModule } from "../../services/services.module";
 import { IconComponentModule } from "../../components/icon/icon.module";
 import { TranslationSelectorModule } from "../../components/translation-selector/translation-selector.module";
@@ -11,7 +15,7 @@ import { environment } from "../../environments/environment";
 import { AppToolbarModule } from "../../components/app-toolbar/app-toolbar.module";
 
 @NgModule({
-	declarations: [TranslatePageComponent],
+	declarations: [TranslatePageComponent, DownnloadDialog],
 	imports: [
 		MatButtonModule,
 		IconComponentModule,

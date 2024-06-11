@@ -9,6 +9,7 @@ interface APITranslationConfig {
 
 interface TranslationResponse {
 	english_word: string;
+	primary_word: string;
 	translations: [
 		{
 			english_word: string;
@@ -91,24 +92,34 @@ export class APITranslationService implements ITranslationService {
 		};
 
 		const response = await this.http
-			.post<TranslationResponse[]>(this.config.endpointURL, _payload)
+			.post<any>(this.config.endpointURL, _payload)
 			.toPromise();
 
-		let translations = response.map((tr) => ({
-			english: tr.english_word,
-			translations: tr.translations.map((tr) => ({
+		let translations = response.map((tr: any) => {
+			const _transWord = {
 				english: tr.english_word,
-				original: tr.primary_word,
-				translation: tr.translation,
-				transliteration: tr.transliteration,
-				soundURL: APITranslationService.formatSoundURL(tr.sound_link),
-			})),
-		}));
+				primary: tr.translations[0]?.primary_word,
+				translations: tr.translations.map((tr: any) => ({
+					english: tr.english_word,
+					original: tr.primary_word,
+					translation: tr.translation,
+					transliteration: tr.transliteration,
+					soundURL: APITranslationService.formatSoundURL(
+						tr.sound_link
+					),
+				})),
+			};
+
+			return _transWord;
+		});
+
 		// add any missing translations
 		lowercaseWords.forEach((w) => {
-			if (!translations.find((tr) => tr.english === w)) {
+			const _tr = translations.find((tr: any) => tr.english === w);
+			if (!_tr) {
 				translations.push({
 					english: w,
+					primary: (_tr as any)?.primary,
 					translations: [
 						{
 							original: "",
@@ -121,8 +132,9 @@ export class APITranslationService implements ITranslationService {
 				});
 			}
 		});
+
 		// filter out empty translations
-		translations = translations.filter((tr) => tr.english);
+		translations = translations.filter((tr: any) => tr.english);
 		// cache results
 		this.lastRequest = newRequest;
 		this.lastResponse = translations;
