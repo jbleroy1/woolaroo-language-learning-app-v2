@@ -205,7 +205,6 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 		}
 
 		this.endangeredLanguageService.setLanguages(_endangeredLanguages);
-		this.i18nService.initI8n();
 
 		this.showResults = !this.showResults;
 	}
