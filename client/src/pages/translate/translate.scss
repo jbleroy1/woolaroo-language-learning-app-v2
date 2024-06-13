@@ -1,6 +1,7 @@
 @use "@angular/material" as mat;
 @import "../../style/components";
 @import "../../style/palette";
+
 :host {
 	width: 100%;
 	height: 100%;
@@ -10,10 +11,12 @@
 	justify-content: flex-end;
 	position: relative;
 	overflow: hidden;
+
 	@media only screen and (min-width: 321px) and (max-width: 1023px) and (orientation: landscape) {
 		padding-top: 150px;
 		overflow: auto;
 	}
+
 	&:before {
 		content: "";
 		flex: 0 0 auto;
@@ -47,9 +50,11 @@ app-translation-selector {
 	margin-bottom: 20px;
 	color: mat.get-color-from-palette($app-inverted, "500-contrast");
 	font-size: 20px;
+
 	span {
 		vertical-align: middle;
 	}
+
 	app-icon {
 		margin-left: 8px;
 		margin-right: 8px;
@@ -91,6 +96,7 @@ mat-toolbar {
 	height: 40px;
 	border-radius: 3px;
 	font-size: 16px;
+
 	:hover {
 		cursor: pointer;
 	}
@@ -108,14 +114,14 @@ mat-toolbar {
 	border: none;
 	color: mat.get-color-from-palette($app-accent);
 	font-weight: 400;
-	padding: 0;
 	margin-top: 20px;
 	margin-bottom: 10px;
 	border-radius: 3px;
-	word-wrap: break-word;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	text-align: center;
-	display: grid;
-	place-items: center;
+
 	:hover {
 		cursor: pointer;
 		background-color: lighten(
@@ -123,19 +129,17 @@ mat-toolbar {
 			68
 		);
 	}
+
 	p {
 		font-size: 12px;
 		text-decoration: wavy;
-		width: 100%;
-		text-wrap: wrap;
 		margin: 0;
 		padding: 0;
-		height: 100%;
+		width: 100%;
 	}
 }
 
 .copied {
-	// color: mat.get-color-from-palette($app-accent);
 	font-size: 12px;
 	margin-bottom: 15px;
 }
