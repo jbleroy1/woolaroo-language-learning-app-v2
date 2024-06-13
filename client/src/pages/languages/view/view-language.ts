@@ -65,4 +65,7 @@ export class ViewLanguagePageComponent {
 		ev.stopPropagation();
 		history.back();
 	}
+	prefixImageUrl(sampleWordImageURL: string): string {
+		return `${this.endangeredLanguageService.imageAssetsURL}${sampleWordImageURL}`;
+	  }
 }
