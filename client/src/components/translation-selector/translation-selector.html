@@ -26,8 +26,7 @@
 			</button>
 		</span>
 	</div>
-	<!-- *ngIf="displayTranslation?.soundURL"  -->
-	<button class="play-audio" (click)="onPlayAudioClick()">
+	<button class="play-audio" *ngIf="displayTranslation?.soundURL" (click)="onPlayAudioClick()">
 		<app-icon icon="play_audio" shadow="true" *ngIf="audioState === audioStateValues.Stopped"></app-icon>
 		<mat-progress-spinner [diameter]="45" mode="indeterminate" class="loading"
 			*ngIf="audioState !== audioStateValues.Stopped"></mat-progress-spinner>
