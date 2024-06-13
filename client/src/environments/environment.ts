@@ -467,6 +467,8 @@ export const environment = {
 				],
 				endangeredLanguageEndpoint: `${newBaseURL}/get_region_languages`,
 				regionEndpoint: `${newBaseURL}/get_regions`,
+				assetsImageURL:
+					"https://storage.googleapis.com/woolaroo_media/",
 			},
 		},
 		translation: {

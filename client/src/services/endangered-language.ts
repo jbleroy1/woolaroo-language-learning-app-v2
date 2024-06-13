@@ -30,6 +30,7 @@ interface EndangeredLanguageConfig {
 	languages: EndangeredLanguage[];
 	endangeredLanguageEndpoint: string;
 	regionEndpoint: string;
+	assetsImageURL: string;
 }
 
 export const ENDANGERED_LANGUAGE_CONFIG =
@@ -56,6 +57,10 @@ export class EndangeredLanguageService {
 
 	public get displayRegions(): EndangeredLanguage[] {
 		return this._displayRegions;
+	}
+
+	public get imageAssetsURL(): string {
+		return this.config.assetsImageURL;
 	}
 
 	constructor(
