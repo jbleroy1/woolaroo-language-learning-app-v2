@@ -7,4 +7,5 @@ export const params = {
 	endangeredLanguage: "",
 	termsAndPrivacyEnabled: false,
 	termsAndPrivacyContent: null,
+	assetsImageURL: "",
 };
