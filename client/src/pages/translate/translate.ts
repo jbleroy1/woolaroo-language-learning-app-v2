@@ -67,10 +67,9 @@ export interface DialogData {
 	selector: "app-download-dialog",
 	templateUrl: "download-dialog.html",
 	styleUrls: ["./translate.scss"],
-	// standalone: true,
-	// imports: [MatDialogTitle, MatDialogContent],
 })
 export class DownnloadDialog {
+	processing: boolean = false;
 	private _uploadedFile: string = "";
 	public get uploadedFile(): string {
 		return this._uploadedFile;
@@ -80,7 +79,8 @@ export class DownnloadDialog {
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: DialogData,
-		private http: HttpClient
+		private http: HttpClient,
+		private endangeredLanguageService: EndangeredLanguageService
 	) {
 		this._uploadImage(data);
 	}
@@ -88,13 +88,19 @@ export class DownnloadDialog {
 	private async _uploadImage(data: DialogData) {
 		const formData = new FormData();
 		formData.append("file", data.image);
+
+		this.processing = true;
+
 		const response = await this.http
 			.post<any>(
 				"https://woolaroo-b9v1uynn.uc.gateway.dev/upload_image",
 				formData
 			)
 			.toPromise();
-		this._uploadedFile = `https://storage.googleapis.com/woolaroo_images//${response.filename}`;
+
+		this.processing = false;
+
+		this._uploadedFile = `${this.endangeredLanguageService.imageAssetsURL}${response.filename}`;
 	}
 
 	copyLink() {
