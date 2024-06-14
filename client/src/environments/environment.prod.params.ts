@@ -1,5 +1,5 @@
 export const params = {
-	assetsBaseUrl: "https://storage.googleapis.com/woolaroo_media",
+	assetsBaseUrl: "",
 	googleTrackerId: "",
 	apiUrl: "https://woolaroo-b9v1uynn.uc.gateway.dev",
 	partnerLogoUrl: "",
@@ -7,5 +7,5 @@ export const params = {
 	endangeredLanguage: "",
 	termsAndPrivacyEnabled: false,
 	termsAndPrivacyContent: null,
-	assetsImageURL: "",
+	assetsImageURL: "https://storage.googleapis.com/woolaroo_media",
 };
