@@ -215,5 +215,4 @@ export class TranslationSelectorComponent {
 	trackTrans(index: number, trans: Translation) {
 		return trans.translation + index;
 	}
-
 }

@@ -140,5 +140,9 @@
 	"download": "Scaricamento",
 	"add_word": "Aggiungi parola",
 	"copied": "Copiato",
-	"processing": "Elaborazione dell'immagine"
+	"processing": "Elaborazione dell'immagine",
+	"termsAndPrivacyButton": "Leggi i nostri Termini e l'Informativa sulla privacy",
+	"t_and_c": "Accetta termini e condizioni",
+	"iosVersionMessage": "Per un'esperienza ottimizzata, assicurati che sul tuo dispositivo sia installato il sistema operativo più recente.",
+	"unsupportedMessage": "Questa PWA è stata progettata per dispositivi mobili, utilizza il tuo cellulare per un'esperienza ottimizzata."
 }

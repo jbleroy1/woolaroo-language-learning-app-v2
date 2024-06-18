@@ -5,7 +5,8 @@ export const params = {
 	partnerLogoUrl: "",
 	language: "en",
 	endangeredLanguage: "",
-	termsAndPrivacyEnabled: false,
-	termsAndPrivacyContent: null,
+	termsAndPrivacyEnabled: true,
+	termsAndPrivacyContent:
+		'<b>Terms and Privacy</b><br /><a target="_blank" href="https://www.google.com/intl/en/policies/terms/">Google terms of use</a><br /><a target="_blank" href="https://www.google.com/intl/en/policies/privacy/">Google privacy policy</a>',
 	assetsImageURL: "https://storage.googleapis.com/woolaroo_media",
 };

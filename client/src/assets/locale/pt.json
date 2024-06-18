@@ -69,5 +69,7 @@
 	"shareable_link": "Clique aqui para copiar o link compartilhável",
 	"download": "Download",
 	"add_word": "Adicionar palavra",
-	"processing": "Processando imagem..."
+	"processing": "Processando imagem...",
+	"termsAndPrivacyButton": "Leia nossos termos e a política de privacidade",
+	"t_and_c": "Aceite os Termos e Condições"
 }

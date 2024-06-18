@@ -94,7 +94,7 @@ export const environment = {
 		termsAndPrivacy: {
 			enabled: true,
 			content:
-				'<b>Terms and Privacy content</b><br /><a href="#">Here\'s a link</a>',
+				'<b>Terms and Privacy</b><br /><a target="_blank" href="https://www.google.com/intl/en/policies/terms/">Google terms of use</a><br /><a target="_blank" href="https://www.google.com/intl/en/policies/privacy/">Google privacy policy</a>',
 		},
 		captionImage: {
 			debugImageUrl,

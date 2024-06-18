@@ -140,5 +140,9 @@
 	"download": "Télécharger",
 	"add_word": "Ajouter un mot",
 	"copied": "Copié",
-	"processing": "Traitement de l'image..."
+	"processing": "Traitement de l'image...",
+	"termsAndPrivacyButton": "Lisez nos conditions et notre politique de confidentialité",
+	"t_and_c": "Accepter les conditions générales",
+	"iosVersionMessage": "Pour une expérience optimisée, assurez-vous que votre appareil exécute le dernier système d'exploitation.",
+	"unsupportedMessage": "Cette PWA a été conçue pour les appareils mobiles, veuillez utiliser votre mobile pour une expérience optimisée."
 }
