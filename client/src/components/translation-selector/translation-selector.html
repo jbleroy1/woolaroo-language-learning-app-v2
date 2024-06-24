@@ -4,6 +4,14 @@
 	*ngIf="selectedWord && displayTranslation?.translation"
 >
 	<div class="transliteration" *ngIf="displayTranslation?.transliteration">
+		<span class="add">
+			<button
+				*ngIf="displayTranslation?.transliteration"
+				(click)="onAddTranslationClick()"
+			>
+				<app-icon icon="add" shadow="true"></app-icon>
+			</button>
+		</span>
 		<span class="word">{{ displayTranslation?.transliteration }}</span>
 		<span class="share">
 			<button

@@ -55,6 +55,10 @@ export class EndangeredLanguageService {
 		return this._contextLanguages;
 	}
 
+	public get allLanguages(): EndangeredLanguage[] {
+		return this._allLanguages;
+	}
+
 	public get displayRegions(): EndangeredLanguage[] {
 		return this._displayRegions;
 	}

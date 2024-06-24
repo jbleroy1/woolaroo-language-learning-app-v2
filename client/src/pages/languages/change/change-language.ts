@@ -92,6 +92,12 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 			);
 
 		this.allLanguages = this._sortLanguages(
+			this.endangeredLanguageService.allLanguages
+		);
+
+		console.log(
+			"endanngered languages",
+			this.endangeredLanguageService.allLanguages,
 			this.endangeredLanguageService.languages
 		);
 	}
@@ -152,7 +158,6 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 	}
 
 	async saveSelectedLanguages() {
-		// save the language preferences, in case use did not change language
 		const profile = await this.profileService.loadProfile();
 		profile.language =
 			this.i18nService.languages[this.currentUILanguageIndex]?.code;
