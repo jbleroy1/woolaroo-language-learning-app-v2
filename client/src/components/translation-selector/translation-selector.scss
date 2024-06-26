@@ -68,6 +68,8 @@
 			align-items: center;
 			button {
 				@include icon-button;
+				background-color: rgba(0, 0, 0, 0.1);
+				border-radius: 50%;
 				color: mat.get-color-from-palette(
 					$app-inverted,
 					"500-contrast"
@@ -77,9 +79,12 @@
 			}
 		}
 		.add {
-			margin-right: 10px;
+			margin-right: 20px;
+			margin-left: -30px;
 			button {
 				@include icon-button;
+				background-color: rgba(0, 0, 0, 0.1);
+				border-radius: 50%;
 				color: mat.get-color-from-palette(
 					$app-inverted,
 					"500-contrast"
@@ -109,7 +114,7 @@
 	}
 	.regions {
 		justify-content: flex-start;
-		min-height: 100px;
+		// min-height: 100px;
 		// This used to have ::ng-deep on it, now it has been deprecated.
 		app-scroll-list {
 			width: 100%;
@@ -128,7 +133,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-top: 40px;
+		margin-top: 20px;
 		.label {
 			font-size: 18px;
 			margin-bottom: 20px;
