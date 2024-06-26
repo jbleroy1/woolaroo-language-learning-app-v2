@@ -94,12 +94,6 @@ export class ChangeLanguagePageComponent implements AfterViewInit {
 		this.allLanguages = this._sortLanguages(
 			this.endangeredLanguageService.allLanguages
 		);
-
-		console.log(
-			"endanngered languages",
-			this.endangeredLanguageService.allLanguages,
-			this.endangeredLanguageService.languages
-		);
 	}
 
 	ngOnInit() {
