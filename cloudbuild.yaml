@@ -84,3 +84,5 @@ steps:
       - deploy
       - dispatch.yaml
     dir: "server"
+build:
+  logsBucket: 'gs://cloud-build-woolaroo-logs'
