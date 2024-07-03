@@ -85,5 +85,4 @@ steps:
       - deploy
       - dispatch.yaml
     dir: "server"
-build:
   
