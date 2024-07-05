@@ -10,7 +10,9 @@ const validation = require('./validation');
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 const visionClient = new vision.v1p3beta1.ImageAnnotatorClient();
-const datastore = new Datastore();
+const datastore = new Datastore({
+    databaseId: 'woolaroo' 
+});
 
 async function getGoogleAPIAuthentication() {
     const auth = new google.auth.GoogleAuth({ scopes: ['https://www.googleapis.com/auth/drive'] });
