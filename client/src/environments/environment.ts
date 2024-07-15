@@ -1,15 +1,15 @@
-import { MockAnalyticsService } from '../services/mock/analytics';
-import { LocalProfileService } from '../services/local-profile';
 import { APIFeedbackService } from '../services/api/feedback';
-import { MockTranslationService } from '../services/mock/translation';
+import { LocalProfileService } from '../services/local-profile';
+import { MockAnalyticsService } from '../services/mock/analytics';
 import { MockImageRecognitionService } from '../services/mock/image-recognition';
+import { MockTranslationService } from '../services/mock/translation';
 import { params } from './environment.prod.params';
 
 const baseEndpointUrl = '';
 const debugImageUrl = '/assets/debug/IMG_20190920_141505.jpg';
 
 export const environment = {
-  production: false,
+  production: true,
   loggingEnabled: true,
   assets: {
     baseUrl: '/woolaroo/',

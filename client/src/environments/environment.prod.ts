@@ -7,7 +7,7 @@ import { LocalProfileService } from '../services/local-profile';
 import { params } from './environment.prod.params';
 
 export const environment = {
-  production: false,
+  production: true,
   loggingEnabled: false,
   assets: {
     baseUrl: params.assetsBaseUrl,
