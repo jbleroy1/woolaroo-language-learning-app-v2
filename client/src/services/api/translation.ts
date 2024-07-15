@@ -90,6 +90,7 @@ export class APITranslationService implements ITranslationService {
 
     let translations = await Promise.all(response.map(async (tr) => {
       const s = await this.getSentence(tr.primary_word, primaryLanguage, targetLanguage);
+      console.log(s);
       return {
         english: tr.english_word,
         original: tr.primary_word,
@@ -100,16 +101,7 @@ export class APITranslationService implements ITranslationService {
       };
     }));
  
-    let translations2 = response.map( tr => 
-       ({
-        english: tr.english_word,
-        original: tr.primary_word,
-        translation: tr.translation,
-        transliteration: tr.transliteration,
-        sentence: "this.getSentence(tr.primary_word, primaryLanguage, targetLanguage)",
-        soundURL: APITranslationService.formatSoundURL(tr.sound_link)
-      }))
-  ;
+   
     // add any missing translations
     lowercaseWords.forEach((w) => {
       if (!translations.find((tr) => tr.english === w)) {
