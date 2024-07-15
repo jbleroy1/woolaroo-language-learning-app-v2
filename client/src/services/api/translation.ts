@@ -86,14 +86,19 @@ export class APITranslationService implements ITranslationService {
       primary_language: primaryLanguage,
       target_language: targetLanguage
     }).toPromise();
-    let translations = response.map(tr => ({
-      english: tr.english_word,
-      original: tr.primary_word,
-      translation: tr.translation,
-      transliteration: tr.transliteration,
-      sentence: this.getSentence(tr.primary_word, primaryLanguage, targetLanguage).then(s => s.sentence),
-      soundURL: APITranslationService.formatSoundURL(tr.sound_link)
-    }));
+    let translations = response.map(tr => {
+      this.getSentence(tr.primary_word, primaryLanguage, targetLanguage).then(sent => {
+        console.log(sent)
+        return ({
+          english: tr.english_word,
+          original: tr.primary_word,
+          translation: tr.translation,
+          transliteration: tr.transliteration,
+          sentence: sent ,
+          soundURL: APITranslationService.formatSoundURL(tr.sound_link)
+        })})
+      });
+   
     // add any missing translations
     lowercaseWords.forEach((w) => {
       if (!translations.find((tr) => tr.english === w)) {
