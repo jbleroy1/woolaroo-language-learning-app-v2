@@ -69,12 +69,12 @@ export class APITranslationService implements ITranslationService {
     }
   }
 
-  public async getSentence(word: string, primaryLanguage: string, targetLanguage: string): Promise<SentenceResponse> {
+  public  async getSentence(word: string, primaryLanguage: string, targetLanguage: string): Promise<SentenceResponse> {
   return this.http.post<SentenceResponse>(this.sentenceConfig.endpointURL, { word, primaryLanguage, TargetLanguage: targetLanguage }).toPromise()
   }
 
   public async translate(englishWords: string[], primaryLanguage: string, targetLanguage: string,
-                         maxTranslations: number = 0): Promise<WordTranslation[]> {
+    maxTranslations: number = 0): Promise<WordTranslation[]> {
     const lowercaseWords = englishWords.map((w) => w.toLowerCase());
     const newRequest: TranslateRequest = { words: lowercaseWords, primaryLanguage, targetLanguage };
     if (this.lastRequest && this.lastResponse && APITranslationService.requestsAreEqual(this.lastRequest, newRequest)) {
@@ -86,23 +86,34 @@ export class APITranslationService implements ITranslationService {
       primary_language: primaryLanguage,
       target_language: targetLanguage
     }).toPromise();
-    let translations = response.map(tr => {
-      this.getSentence(tr.primary_word, primaryLanguage, targetLanguage).then(sent => {
-        console.log(sent)
-        return ({
-          english: tr.english_word,
-          original: tr.primary_word,
-          translation: tr.translation,
-          transliteration: tr.transliteration,
-          sentence: sent ,
-          soundURL: APITranslationService.formatSoundURL(tr.sound_link)
-        })})
-      });
-   
+  
+
+    let translations = await Promise.all(response.map(async (tr) => {
+      const s = await this.getSentence(tr.primary_word, primaryLanguage, targetLanguage);
+      return {
+        english: tr.english_word,
+        original: tr.primary_word,
+        translation: tr.translation,
+        transliteration: tr.transliteration,
+        sentence: s.sentence,
+        soundURL: APITranslationService.formatSoundURL(tr.sound_link)
+      };
+    }));
+ 
+    let translations2 = response.map( tr => 
+       ({
+        english: tr.english_word,
+        original: tr.primary_word,
+        translation: tr.translation,
+        transliteration: tr.transliteration,
+        sentence: "this.getSentence(tr.primary_word, primaryLanguage, targetLanguage)",
+        soundURL: APITranslationService.formatSoundURL(tr.sound_link)
+      }))
+  ;
     // add any missing translations
     lowercaseWords.forEach((w) => {
       if (!translations.find((tr) => tr.english === w)) {
-        translations.push({ original: '', english: w, translation: '', transliteration: '', soundURL: '' });
+        translations.push({ original: '', english: w, translation: '', transliteration: '', sentence: '',soundURL: '' });
       }
     });
     // filter out empty translations
