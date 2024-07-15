@@ -3,5 +3,6 @@ export interface WordTranslation {
   english: string;
   translation: string;
   transliteration: string;
-  soundURL: string|null;
+  soundURL: string | null;
+  sentence: string | null;
 }

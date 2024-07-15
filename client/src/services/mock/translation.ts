@@ -10,7 +10,8 @@ export class MockTranslationService implements ITranslationService {
       english: w + ' en',
       translation: index > 0 ? w + ' tr' : '白天',
       transliteration: '白天',
-      soundURL: index > 1 ? '/assets/debug/translation.mp3?v=1' : null
+      soundURL: index > 1 ? '/assets/debug/translation.mp3?v=1' : null,
+      sentence: 'mock sentence with the word  ' +w 
     }));
   }
 }

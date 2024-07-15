@@ -1,13 +1,13 @@
-import { GoogleAnalyticsService } from '../services/google/analytics';
-import { SafeSearchLikelihood } from '../services/google/image-recognition';
-import { APITranslationService } from '../services/api/translation';
-import { LocalProfileService } from '../services/local-profile';
 import { APIFeedbackService } from '../services/api/feedback';
 import { APIImageRecognitionService } from '../services/api/image-recognition';
+import { APITranslationService } from '../services/api/translation';
+import { GoogleAnalyticsService } from '../services/google/analytics';
+import { SafeSearchLikelihood } from '../services/google/image-recognition';
+import { LocalProfileService } from '../services/local-profile';
 import { params } from './environment.prod.params';
 
 export const environment = {
-  production: true,
+  production: false,
   loggingEnabled: false,
   assets: {
     baseUrl: params.assetsBaseUrl,
@@ -391,6 +391,12 @@ export const environment = {
       type: APITranslationService,
       config: {
         endpointURL: `${params.apiUrl}/getTranslations`
+      }
+    },
+    sentence: {
+      type: APITranslationService,
+      config: {
+        endpointURL: `${params.apiUrl}/function-hello-world`
       }
     },
     analytics: {

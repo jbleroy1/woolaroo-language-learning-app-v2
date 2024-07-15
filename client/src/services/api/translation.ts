@@ -1,9 +1,13 @@
-import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { WordTranslation } from '../entities/translation';
-import { ITranslationService, TRANSLATION_CONFIG } from '../translation';
+import { ITranslationService, SENTENCE_CONFIG, TRANSLATION_CONFIG } from '../translation';
 
 interface APITranslationConfig {
+  endpointURL: string;
+}
+
+interface APISentenceConfig {
   endpointURL: string;
 }
 
@@ -21,12 +25,27 @@ interface TranslateRequest {
   targetLanguage: string;
 }
 
+interface SentenceRequest {
+  word: string;
+  primaryLanguage: string;
+  TargetLanguage: string;
+}
+
+interface SentenceResponse {
+  word: string;
+  primaryLanguage: string;
+  TargetLanguage: string;
+  model: string;
+  sentence: string;
+}
+
+
 @Injectable()
 export class APITranslationService implements ITranslationService {
   private lastRequest: TranslateRequest|null = null;
   private lastResponse: WordTranslation[]|null = null;
 
-  public constructor(private http: HttpClient, @Inject(TRANSLATION_CONFIG) private config: APITranslationConfig) {
+  public constructor(private http: HttpClient, @Inject(TRANSLATION_CONFIG) private config: APITranslationConfig, @Inject(SENTENCE_CONFIG) private sentenceConfig: APISentenceConfig) {
   }
 
   private static requestsAreEqual(request1: TranslateRequest, request2: TranslateRequest): boolean {
@@ -50,6 +69,10 @@ export class APITranslationService implements ITranslationService {
     }
   }
 
+  public async getSentence(word: string, primaryLanguage: string, targetLanguage: string): Promise<SentenceResponse> {
+  return this.http.post<SentenceResponse>(this.sentenceConfig.endpointURL, { word, primaryLanguage, TargetLanguage: targetLanguage }).toPromise()
+  }
+
   public async translate(englishWords: string[], primaryLanguage: string, targetLanguage: string,
                          maxTranslations: number = 0): Promise<WordTranslation[]> {
     const lowercaseWords = englishWords.map((w) => w.toLowerCase());
@@ -68,6 +91,7 @@ export class APITranslationService implements ITranslationService {
       original: tr.primary_word,
       translation: tr.translation,
       transliteration: tr.transliteration,
+      sentence: this.getSentence(tr.primary_word, primaryLanguage, targetLanguage).then(s => s.sentence),
       soundURL: APITranslationService.formatSoundURL(tr.sound_link)
     }));
     // add any missing translations

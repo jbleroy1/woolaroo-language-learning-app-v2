@@ -8,6 +8,12 @@
       </button>
     </span>
   </div>
+  <div class="sentence" *ngIf="selectedWord.sentence !== selectedWord.transliteration && selectedWord.sentence !=null">
+    <span *ngFor="let word of selectedWord.sentence.split(' '); let i = index">
+      <span [ngClass] ="{ 'main-word': word.trim() === selectedWord.original}">{{word}}</span>
+     <span *ngIf="i < selectedWord.sentence.split(' ').length - 1">&nbsp;</span></span>
+   <!--  <span class="word">{{ selectedWord.sentence }}</span> -->
+  </div>
   <div class="translation" *ngIf="selectedWord.translation !== selectedWord.transliteration">
     <span class="word">{{ selectedWord.translation }}</span>
     <span class="share">
