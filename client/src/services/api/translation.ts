@@ -28,13 +28,13 @@ interface TranslateRequest {
 interface SentenceRequest {
   word: string;
   primaryLanguage: string;
-  TargetLanguage: string;
+  targetLanguage: string;
 }
 
 interface SentenceResponse {
   word: string;
   primaryLanguage: string;
-  TargetLanguage: string;
+  targetLanguage: string;
   model: string;
   sentence: string;
 }
@@ -87,7 +87,7 @@ export class APITranslationService implements ITranslationService {
       target_language: targetLanguage
     }).toPromise();
   
-
+    console.log("before caling le asyn");
     let translations = await Promise.all(response.map(async (tr) => {
       const s = await this.getSentence(tr.primary_word, primaryLanguage, targetLanguage);
       console.log(s);
