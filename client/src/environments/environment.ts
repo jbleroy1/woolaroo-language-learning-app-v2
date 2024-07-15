@@ -1,4 +1,5 @@
 import { APIFeedbackService } from '../services/api/feedback';
+import { APITranslationService } from '../services/api/translation';
 import { LocalProfileService } from '../services/local-profile';
 import { MockAnalyticsService } from '../services/mock/analytics';
 import { MockImageRecognitionService } from '../services/mock/image-recognition';
@@ -391,6 +392,12 @@ export const environment = {
       type: MockTranslationService,
       config: {
         endpointURL: `${baseEndpointUrl}/getTranslations`
+      }
+    },
+    sentence: {
+      type: APITranslationService,
+      config: {
+        endpointURL: `${params.apiUrl}/function-hello-world`
       }
     },
     analytics: {
