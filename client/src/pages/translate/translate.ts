@@ -160,7 +160,7 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
       logger.warn('Error loading translations', ex);
       // show words as if none had translations
       this.zone.run(() => {
-        this.translations = words.map(w => ({ original: w, english: '', translation: '', transliteration: '', soundURL: null, sentence: 'no-sentence-found' }));
+        this.translations = words.map(w => ({ original: w, english: '', translation: '', transliteration: '', soundURL: null, sentence: 'no-sentence-found' , translated_word:'no translation'}));
       });
       return;
     }

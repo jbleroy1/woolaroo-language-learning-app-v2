@@ -37,6 +37,7 @@ interface SentenceResponse {
   targetLanguage: string;
   model: string;
   sentence: string;
+  translated_word: string
 }
 
 
@@ -97,6 +98,7 @@ export class APITranslationService implements ITranslationService {
         translation: tr.translation,
         transliteration: tr.transliteration,
         sentence: s.sentence,
+        translated_word: s.translated_word,
         soundURL: APITranslationService.formatSoundURL(tr.sound_link)
       };
     }));
@@ -105,7 +107,7 @@ export class APITranslationService implements ITranslationService {
     // add any missing translations
     lowercaseWords.forEach((w) => {
       if (!translations.find((tr) => tr.english === w)) {
-        translations.push({ original: '', english: w, translation: '', transliteration: '', sentence: '',soundURL: '' });
+        translations.push({ original: '', english: w, translation: '', transliteration: '', sentence: '',translated_word: '', soundURL: '' });
       }
     });
     // filter out empty translations

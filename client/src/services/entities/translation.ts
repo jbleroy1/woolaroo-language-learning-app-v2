@@ -5,4 +5,6 @@ export interface WordTranslation {
   transliteration: string;
   soundURL: string | null;
   sentence: string | null;
+  translated_word: string|null;
+ 
 }
