@@ -1,7 +1,7 @@
 export const params = {
   assetsBaseUrl: '',
   googleTrackerId: '',
-  apiUrl: '',
+  apiUrl: ' https://us-central1-cilex-woolaroo-2.cloudfunctions.net',
   partnerLogoUrl: '',
   language: '',
   endangeredLanguage: '',

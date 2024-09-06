@@ -397,7 +397,7 @@ export const environment = {
     sentence: {
       type: APITranslationService,
       config: {
-        endpointURL: `${params.apiUrl}/function-hello-world`
+        endpointURL: `${params.apiUrl}/get_sentences`
       }
     },
     analytics: {

@@ -28,7 +28,7 @@ interface TranslateRequest {
 interface SentenceRequest {
   word: string;
   primaryLanguage: string;
-  targetLanguage: string;
+  replaced_word: string;
 }
 
 interface SentenceResponse {
@@ -37,7 +37,7 @@ interface SentenceResponse {
   targetLanguage: string;
   model: string;
   sentence: string;
-  translated_word: string
+  replaced_word: string
 }
 
 
@@ -70,8 +70,8 @@ export class APITranslationService implements ITranslationService {
     }
   }
 
-  public  async getSentence(word: string, primaryLanguage: string, targetLanguage: string): Promise<SentenceResponse> {
-  return this.http.post<SentenceResponse>(this.sentenceConfig.endpointURL, { word, primaryLanguage, TargetLanguage: targetLanguage }).toPromise()
+  public  async getSentence(word: string, primaryLanguage: string, replaced_word: string): Promise<SentenceResponse> {
+  return this.http.post<SentenceResponse>(this.sentenceConfig.endpointURL, { word, primaryLanguage, replaced_word }).toPromise()
   }
 
   public async translate(englishWords: string[], primaryLanguage: string, targetLanguage: string,
@@ -90,7 +90,7 @@ export class APITranslationService implements ITranslationService {
   
     console.log("before caling le asyn");
     let translations = await Promise.all(response.map(async (tr) => {
-      const s = await this.getSentence(tr.primary_word, primaryLanguage, targetLanguage);
+      const s = await this.getSentence(tr.primary_word, primaryLanguage, tr.translation);
       console.log(s);
       return {
         english: tr.english_word,
@@ -98,7 +98,7 @@ export class APITranslationService implements ITranslationService {
         translation: tr.translation,
         transliteration: tr.transliteration,
         sentence: s.sentence,
-        translated_word: s.translated_word,
+        translated_word: tr.translation,
         soundURL: APITranslationService.formatSoundURL(tr.sound_link)
       };
     }));

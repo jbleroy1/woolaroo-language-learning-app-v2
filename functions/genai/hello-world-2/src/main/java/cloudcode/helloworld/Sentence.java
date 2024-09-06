@@ -16,4 +16,5 @@ public class Sentence {
     private String primaryLanguage;
     private String TargetLanguage;
     private String sentence;
+    private String replaced_word;
 }
