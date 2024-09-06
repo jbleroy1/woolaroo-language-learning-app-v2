@@ -90,6 +90,7 @@ export class APITranslationService implements ITranslationService {
   
     console.log("before caling le asyn");
     let translations = await Promise.all(response.map(async (tr) => {
+      console.log(tr)
       const s = await this.getSentence(tr.primary_word, primaryLanguage, tr.translation);
       console.log(s);
       return {
