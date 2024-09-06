@@ -391,7 +391,7 @@ export const environment = {
     translation: {
       type: MockTranslationService,
       config: {
-        endpointURL: `${baseEndpointUrl}/getTranslations`
+        endpointURL: `${baseEndpointUrl}/get_translations_gen2`
       }
     },
     sentence: {

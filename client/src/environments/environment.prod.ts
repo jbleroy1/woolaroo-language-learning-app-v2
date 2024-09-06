@@ -390,13 +390,13 @@ export const environment = {
     translation: {
       type: APITranslationService,
       config: {
-        endpointURL: `${params.apiUrl}/getTranslations`
+        endpointURL: `${params.apiUrl}/get_translations_gen2`
       }
     },
     sentence: {
       type: APITranslationService,
       config: {
-        endpointURL: `${params.apiUrl}/function-hello-world`
+        endpointURL: `${params.apiUrl}/get_sentences`
       }
     },
     analytics: {
