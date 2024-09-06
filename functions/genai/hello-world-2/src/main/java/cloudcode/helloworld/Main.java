@@ -21,13 +21,13 @@ public class Main {
         public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
                 MultiModal multiModal = new MultiModal();
 
-                Sentence s = multiModal.generateSentence("fr", "trottinette",
-                                "scooter");
+                Sentence s = multiModal.generateSentence("fr", "प्रीतः",
+                                "trottinette");
                 System.out.println(s);
                 GsonBuilder builder = new GsonBuilder().disableHtmlEscaping();
                 Gson gson = builder.create();
-
-                System.out.println(gson.toJson(s, Sentence.class));
+                System.out.println("");
+                System.out.println(gson.toJson(s));
 
         }
 

@@ -25,6 +25,8 @@ public class HelloWorld implements HttpFunction {
     sentence.setSentence(s.getSentence());
     sentence.setReplaced_word(s.getReplaced_word());
     sentence.setModel(MultiModal.GEMINI_MODEL);
+    response.setContentType("application/json; charset=UTF-8");
+
     response.getWriter().write(gson.toJson(s));
   }
 
