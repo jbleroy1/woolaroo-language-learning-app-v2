@@ -11,12 +11,17 @@ interface APISentenceConfig {
   endpointURL: string;
 }
 
-interface TranslationResponse {
+interface Translations {
   english_word: string;
   primary_word: string;
   transliteration: string;
   sound_link: string;
   translation: string;
+}
+
+interface TranslationResponse {
+  english_word: string;
+  translations: Translations[];
 }
 
 interface TranslateRequest {
@@ -91,16 +96,16 @@ export class APITranslationService implements ITranslationService {
     console.log("before caling le asyn");
     let translations = await Promise.all(response.map(async (tr) => {
       console.log(tr)
-      const s = await this.getSentence(tr.primary_word, primaryLanguage, tr.translation);
+      const s = await this.getSentence(tr.translations[0].primary_word, primaryLanguage, tr.translations[0].translation);
       console.log(s);
       return {
         english: tr.english_word,
-        original: tr.primary_word,
-        translation: tr.translation,
-        transliteration: tr.transliteration,
+        original: tr.translations[0].primary_word,
+        translation: tr.translations[0].translation,
+        transliteration: tr.translations[0].transliteration,
         sentence: s.sentence,
-        translated_word: tr.translation,
-        soundURL: APITranslationService.formatSoundURL(tr.sound_link)
+        translated_word: tr.translations[0].translation,
+        soundURL: APITranslationService.formatSoundURL(tr.translations[0].sound_link)
       };
     }));
  
