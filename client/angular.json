@@ -34,9 +34,13 @@
 							"src/manifest.webmanifest",
 							"src/service-worker.js"
 						],
-						"styles": ["src/style/main.scss"],
+						"styles": [
+							"src/style/main.scss"
+						],
 						"stylePreprocessorOptions": {
-							"includePaths": ["./src/style"]
+							"includePaths": [
+								"./src/style"
+							]
 						},
 						"scripts": []
 					},
@@ -51,7 +55,7 @@
 							],
 							"optimization": true,
 							"outputHashing": "all",
-							"sourceMap": false,
+							"sourceMap": true,
 							"namedChunks": false,
 							"extractLicenses": true,
 							"vendorChunk": false,
@@ -99,7 +103,9 @@
 							"src/manifest.webmanifest",
 							"src/service-worker.js"
 						],
-						"styles": ["src/styles.scss"],
+						"styles": [
+							"src/styles.scss"
+						],
 						"scripts": []
 					}
 				},
@@ -111,7 +117,9 @@
 							"tsconfig.spec.json",
 							"e2e/tsconfig.json"
 						],
-						"exclude": ["**/node_modules/**"]
+						"exclude": [
+							"**/node_modules/**"
+						]
 					}
 				},
 				"e2e": {
