@@ -56,5 +56,5 @@ steps:
     args:
       - app
       - deploy
-      - ../client/dist
+      - client/dist
       - --appyaml=./app.yaml
