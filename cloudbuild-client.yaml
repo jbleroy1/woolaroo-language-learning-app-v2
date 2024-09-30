@@ -47,7 +47,7 @@ steps:
     name: node:20
     timeout: 1200s
     entrypoint: "npm"
-    args: ["run", "build", "--", "--output-path=./dist"]
+    args: ["run", "build", "--", "--output-path=./dist", "-c production"]
     dir: "./client"
   - id: "deploy_clientr"
     waitFor:
