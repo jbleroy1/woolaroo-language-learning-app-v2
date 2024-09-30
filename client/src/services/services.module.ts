@@ -16,7 +16,7 @@ import {
 	IMAGE_RECOGNITION_SERVICE,
 } from "./image-recognition";
 import { PROFILE_CONFIG, PROFILE_SERVICE } from "./profile";
-import { TRANSLATION_CONFIG, TRANSLATION_SERVICE } from "./translation";
+import { SENTENCE_CONFIG, TRANSLATION_CONFIG, TRANSLATION_SERVICE } from "./translation";
 
 @NgModule({
 	declarations: [],
