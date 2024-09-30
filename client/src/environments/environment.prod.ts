@@ -449,7 +449,7 @@ export const environment = {
 		translation: {
 			type: APITranslationService,
 			config: {
-				endpointURL: `${params.apiUrl}/getTranslations`,
+				endpointURL: `${params.apiUrl}/get_translations`,
 			},
 		},
 		sentence: {
