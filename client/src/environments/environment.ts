@@ -13,7 +13,7 @@ const debugImageUrl = "/assets/debug/IMG_20190920_141505.jpg";
 const newBaseURL = "https://woolaroo-b9v1uynn.uc.gateway.dev";
 
 export const environment = {
-	production: false,
+	production: true,
 	loggingEnabled: true,
 	assets: {
 		baseUrl: "/woolaroo/",
@@ -483,7 +483,7 @@ export const environment = {
 			type: APITranslationService,
 			config: {
 				// endpointURL: `${baseEndpointUrl}/getTranslations`,
-				endpointURL: `${newBaseURL}/get_sentence`,
+				endpointURL: `${newBaseURL}/get_sentences`,
 				// endpointURL: `${localEndpointUrl}`,
 			},
 		},
