@@ -14,11 +14,11 @@
 		</span>
 	</div>
 	<div class="sentence"
-		*ngIf="selectedWord.sentence !== selectedWord.transliteration && selectedWord.sentence !=null"></div>
-	<span *ngFor="let word of selectedWord.sentence.split(' '); let i = index">
+		*ngIf="selectedWord.translations[0].sentence !== selectedWord.translations[0].transliteration && selectedWord.translations[0].sentence !=null"></div>
+	<span *ngFor="let word of selectedWord.translations[0].sentence.split(' '); let i = index">
 
-		<span [ngClass]="{ 'main-word': word === selectedWord.translation }">{{word.replace('.','')}}</span>
-		<span *ngIf="i < selectedWord.sentence.split(' ').length - 1">&nbsp;</span></span>
+		<span [ngClass]="{ 'main-word': word === selectedWord.translations[0].translation }">{{word.replace('.','')}}</span>
+		<span *ngIf="i < selectedWord.translations[0].sentence.split(' ').length - 1">&nbsp;</span></span>
 	<!--  <span class="word">{{ selectedWord.sentence }}</span> -->
 </div>
 <div class="translation">
@@ -46,7 +46,7 @@
 </button>
 <audio #audioPlayer [src]="displayTranslation?.soundURL | gcsUrl" preload="none" (play)="onAudioPlaying()"
 	(ended)="onAudioStopped()" (pause)="onAudioStopped()"></audio>
-</div>
+
 
 <div class="translation-not-found" [class.hidden]="!selectedWordVisible"
 	*ngIf="selectedWord && !displayTranslation?.translation">

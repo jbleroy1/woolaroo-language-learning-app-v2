@@ -23,10 +23,6 @@ interface TranslationResponse {
 	];
 }
 
-interface TranslationResponse {
-  english_word: string;
-  translations: Translations[];
-}
 
 interface TranslateRequest {
 	words: string[];
