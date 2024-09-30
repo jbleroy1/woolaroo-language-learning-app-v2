@@ -27,7 +27,8 @@ export class MockTranslationService implements ITranslationService {
 					original: w,
 					english: w + " en" + index,
 					translation: index > 0 ? w + " tr" : "白天",
-					transliteration: "translit",
+          transliteration: "translit",
+          sentence: "random sentence with word " + w
 					soundURL:
 						index > 1 ? "assets/debug/translation.mp3?v=1" : null,
 				},
