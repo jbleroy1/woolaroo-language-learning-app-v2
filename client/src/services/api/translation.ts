@@ -142,7 +142,7 @@ export class APITranslationService implements ITranslationService {
 					translation: tr.translation,
 					transliteration: tr.transliteration,
 					sentence: s.sentence,
-					translated_word: tr.translations[0].translation,
+					translated_word: s.replaced_word,
 					soundURL: APITranslationService.formatSoundURL(
 						tr.sound_link
 					),
