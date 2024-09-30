@@ -1,12 +1,10 @@
-import { MockAnalyticsService } from "../services/mock/analytics";
-import { LocalProfileService } from "../services/local-profile";
 import { APIFeedbackService } from "../services/api/feedback";
-import { MockTranslationService } from "../services/mock/translation";
-import { params } from "./environment.prod.params";
 import { APIImageRecognitionService } from "../services/api/image-recognition";
-import { SafeSearchLikelihood } from "../services/google/image-recognition";
-import { MockImageRecognitionService } from "../services/mock/image-recognition";
 import { APITranslationService } from "../services/api/translation";
+import { SafeSearchLikelihood } from "../services/google/image-recognition";
+import { LocalProfileService } from "../services/local-profile";
+import { MockAnalyticsService } from "../services/mock/analytics";
+import { params } from "./environment.prod.params";
 
 const baseEndpointUrl =
 	"https://australia-southeast1-woolaroo-project.cloudfunctions.net";
@@ -477,6 +475,15 @@ export const environment = {
 			config: {
 				// endpointURL: `${baseEndpointUrl}/getTranslations`,
 				endpointURL: `${newBaseURL}/get_translations`,
+				// endpointURL: `${localEndpointUrl}`,
+			},
+		},
+			sentence: {
+			// type: MockTranslationService,
+			type: APITranslationService,
+			config: {
+				// endpointURL: `${baseEndpointUrl}/getTranslations`,
+				endpointURL: `${newBaseURL}/get_sentence`,
 				// endpointURL: `${localEndpointUrl}`,
 			},
 		},
