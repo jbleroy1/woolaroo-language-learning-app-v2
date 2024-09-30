@@ -23,6 +23,11 @@ interface TranslationResponse {
 	];
 }
 
+interface TranslationResponse {
+  english_word: string;
+  translations: Translations[];
+}
+
 interface TranslateRequest {
 	words: string[];
 	primaryLanguage: string;
@@ -42,6 +47,22 @@ interface SentenceResponse {
 	sentence: string;
 	replaced_word: string
 }
+
+interface SentenceRequest {
+  word: string;
+  primaryLanguage: string;
+  replaced_word: string;
+}
+
+interface SentenceResponse {
+  word: string;
+  primaryLanguage: string;
+  targetLanguage: string;
+  model: string;
+  sentence: string;
+  replaced_word: string
+}
+
 
 @Injectable()
 export class APITranslationService implements ITranslationService {
