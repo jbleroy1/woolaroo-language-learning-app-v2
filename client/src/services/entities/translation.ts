@@ -6,6 +6,7 @@ export interface Translation {
 	soundURL: string | null;
 	sentence: string | null;
 	translated_word: string | null;
+	split_sentence: string[] | null;
 }
 
 export interface WordTranslation {

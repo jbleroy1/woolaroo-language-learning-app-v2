@@ -23,10 +23,6 @@ interface TranslationResponse {
 	];
 }
 
-interface TranslationResponse {
-  english_word: string;
-  translations: Translations[];
-}
 
 interface TranslateRequest {
 	words: string[];
@@ -49,18 +45,18 @@ interface SentenceResponse {
 }
 
 interface SentenceRequest {
-  word: string;
-  primaryLanguage: string;
-  replaced_word: string;
+	word: string;
+	primaryLanguage: string;
+	replaced_word: string;
 }
 
 interface SentenceResponse {
-  word: string;
-  primaryLanguage: string;
-  targetLanguage: string;
-  model: string;
-  sentence: string;
-  replaced_word: string
+	word: string;
+	primaryLanguage: string;
+	targetLanguage: string;
+	model: string;
+	sentence: string;
+	replaced_word: string
 }
 
 
@@ -135,7 +131,7 @@ export class APITranslationService implements ITranslationService {
 			.post<any>(this.config.endpointURL, _payload)
 			.toPromise();
 
-		let translations =await Promise.all(response.map(async (tr: any) => {
+		let translations = await Promise.all(response.map(async (tr: any) => {
 			const s = await this.getSentence(tr.translations[0].primary_word, primaryLanguage, tr.translations[0].translation);
 			const _transWord = {
 				english: tr.english_word,
@@ -146,7 +142,8 @@ export class APITranslationService implements ITranslationService {
 					translation: tr.translation,
 					transliteration: tr.transliteration,
 					sentence: s.sentence,
-					translated_word: tr.translations[0].translation,
+					translated_word: s.replaced_word,
+					split_sentence: this.splitSentence(s.sentence, s.replaced_word),
 					soundURL: APITranslationService.formatSoundURL(
 						tr.sound_link
 					),
@@ -182,5 +179,21 @@ export class APITranslationService implements ITranslationService {
 		this.lastRequest = newRequest;
 		this.lastResponse = translations;
 		return translations;
+	}
+	private splitSentence(sentence: string, word: string): string[] {
+
+
+		const index = sentence.indexOf(word);
+		if (index === -1) {
+			return [sentence, "", ""];
+		}
+
+		const firstPart = sentence.substring(0, index).trim();
+		const thirdPart = sentence.substring(index + word.length).trim();
+	
+
+
+		return [firstPart,word,thirdPart]
+
 	}
 }

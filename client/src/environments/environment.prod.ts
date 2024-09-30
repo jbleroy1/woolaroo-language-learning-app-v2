@@ -8,7 +8,7 @@ import { params } from "./environment.prod.params";
 
 export const environment = {
 	production: true,
-	loggingEnabled: false,
+	loggingEnabled: true,
 	assets: {
 		baseUrl: params.assetsBaseUrl,
 	},
@@ -442,12 +442,14 @@ export const environment = {
 					},
 				],
 				assetsImageURL: `${params.assetsImageURL}/`,
+				endangeredLanguageEndpoint: `${params.apiUrl}/get_region_languages`,
+				regionEndpoint: `${params.apiUrl}/get_regions`,
 			},
 		},
 		translation: {
 			type: APITranslationService,
 			config: {
-				endpointURL: `${params.apiUrl}/getTranslations`,
+				endpointURL: `${params.apiUrl}/get_translations`,
 			},
 		},
 		sentence: {
