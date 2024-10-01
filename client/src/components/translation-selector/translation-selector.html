@@ -29,7 +29,7 @@
 			*ngIf="selectedWord.translations[0].sentence !== selectedWord.translations[0].transliteration && selectedWord.translations[0].sentence !=null">
 			<span *ngFor="let word of selectedWord.translations[0].sentence.split(' '); let i = index">
 				<span
-					[ngClass]="{ 'main-word': word.replace('.','') == selectedWord.translations[0].translated_word.trim()}">{{word.replace('.','')}}</span>
+					[ngClass]="{ 'main-word': word.replace('.','').replace(',','') == selectedWord.translations[0].translated_word.trim()}">{{word.replace('.','')}}</span>
 				<span *ngIf="i < selectedWord.translations[0].sentence.split(' ').length - 1">&nbsp;</span></span>
 			<!--  <span class="word">{{ selectedWord.sentence }}</span> -->
 		</div>
