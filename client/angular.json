@@ -23,7 +23,7 @@
 						"baseHref": "/woolaroo/",
 						"outputPath": "dist",
 						"index": {
-							"input": "src/index.dev.html",
+							"input": "src/index.html",
 							"output": "index.html"
 						},
 						"main": "src/main.ts",
