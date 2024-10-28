@@ -1,16 +1,16 @@
 import { HttpClient } from "@angular/common/http";
 import {
-  Component,
-  Inject,
-  InjectionToken,
-  NgZone,
-  OnDestroy,
-  OnInit,
+	Component,
+	Inject,
+	InjectionToken,
+	NgZone,
+	OnDestroy,
+	OnInit,
 } from "@angular/core";
 import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef
+	MAT_DIALOG_DATA,
+	MatDialog,
+	MatDialogRef
 } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { AppRoutes } from "../../app/routes";
@@ -19,14 +19,14 @@ import { I18nService } from "../../i18n/i18n.service";
 import { ANALYTICS_SERVICE, IAnalyticsService } from "../../services/analytics";
 import { EndangeredLanguageService } from "../../services/endangered-language";
 import {
-  Translation,
-  WordTranslation,
+	Translation,
+	WordTranslation,
 } from "../../services/entities/translation";
 import { ImageRenderingService } from "../../services/image-rendering";
 import { SessionService } from "../../services/session";
 import {
-  ITranslationService,
-  TRANSLATION_SERVICE,
+	ITranslationService,
+	TRANSLATION_SERVICE,
 } from "../../services/translation";
 import { loadCapturePageURL } from "../../util/camera";
 import { NotSupportedError } from "../../util/errors";
@@ -298,7 +298,8 @@ export class TranslatePageComponent implements OnInit, OnDestroy {
 							transliteration: "",
 							soundURL: "",
               english: "",
-              sentence: "",
+							sentence: "",
+			  split_sentence: ["","",""],
               translated_word: ""
 						},
 					],
