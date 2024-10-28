@@ -28,8 +28,8 @@
 			<div class="sentence"
 				*ngIf="selectedWord.translations[0].sentence !== selectedWord.translations[0].transliteration && selectedWord.translations[0].sentence !=null">
 				<span>{{ selectedWord.translations[0].split_sentence[0] }}&nbsp;</span>
-				<span class="main-word">{{ selectedWord.translations[0].split_sentence[1] }}&nbsp;</span>
-				<span>{{ selectedWord.translations[0].split_sentence[2] }}</span>
+				<span class="main-word">{{ selectedWord.translations[0].split_sentence[1] }}</span>
+				<span>&nbsp;{{ selectedWord.translations[0].split_sentence[2] }}</span>
 				<!-- <span *ngFor="let parts of selectedWord.translations[0].split_sentence; let i = index">
 					<span *ngFor="let word of selectedWord.translations[0].sentence.split(' '); let i = index">
 						<span
