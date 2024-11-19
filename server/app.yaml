@@ -79,7 +79,7 @@ handlers:
       X-XSS-Protection: "1; mode=block"
       Content-Security-Policy: >-
         default-src 'self';
-        img-src 'self' blob: data: *.googleusercontent.com https://www.google-analytics.com;
+        img-src 'self' blob: data: *.googleusercontent.com https://www.google-analytics.com *.googleapis.com;
         frame-src 'self';
         object-src 'none';
         script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.gstatic.com/ https://www.google-analytics.com https://apis.google.com;

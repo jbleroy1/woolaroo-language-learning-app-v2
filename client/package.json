@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --serve-path=/woolaroo/ -c production",
+    "start": "ng serve --serve-path=/woolaroo/",
+    "start:prod": "ng serve --serve-path=/woolaroo/ --configuration 'production'",
     "build": "ng build",
+    "build:prod": "ng build --configuration 'production'",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -13,5 +13,14 @@ if (environment.loggingEnabled) {
 
 const logger = getLogger('EndangeredLanguageService');
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => logger.error(err));
+import { axlHandshake } from './external/axl_integration';
+
+const { handshake } = axlHandshake()
+handshake
+  .then(() => {
+    platformBrowserDynamic().bootstrapModule(AppModule)
+      .catch(err => logger.error(err));
+  })
+  .catch(() => {
+    alert("AxL handshake failed");
+  })
